@@ -42,6 +42,6 @@ func _process(delta: float) -> void:
 			current_rescue_time += delta
 			if current_rescue_time > rescue_time:
 				print("WOW U SAVED THE SQIURREL!!")
-				ollon_rescued.emit()
+				EventManager.ollon_aquired.emit(player.current_tile.pos)
 				player.current_tile.has_ollon = false
 				stop_rescuing()

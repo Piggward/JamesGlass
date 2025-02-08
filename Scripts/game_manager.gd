@@ -33,7 +33,6 @@ func create_map():
 		var row = []
 		for x in range(MAP_SIZE):
 			var tile = tile_scene.instantiate()
-			tile.has_ollon = true
 			tile.pos = Vector3(x * TILE_SCALE, 0, z * TILE_SCALE)
 			add_child(tile)
 			row.append(tile)

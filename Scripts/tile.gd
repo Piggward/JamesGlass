@@ -48,7 +48,7 @@ func render():
 func light_fire():
 	state = TileState.FIRE
 	fire_effect.visible = true
-	ekollon.visible = false
+	remove_ollon()
 	render()
 
 	var dried_out_tiles = []
@@ -66,6 +66,11 @@ func light_fire():
 		available_neighbours.pop_at(selected_tile)
 	
 	return dried_out_tiles
+	
+func remove_ollon():
+	ekollon.visible = false
+	has_ollon = false
+	EventManager.ollon_aquired.disconnect(_on_ollon_aquired)
 
 func dry_out():
 	state = TileState.DRYWOOD
@@ -75,3 +80,9 @@ func dry_out():
 func spawn_ollon():
 	has_ollon = true
 	ekollon.visible = true
+	EventManager.ollon_aquired.connect(_on_ollon_aquired)
+	
+func _on_ollon_aquired(pos: Vector3):
+	if pos == self.pos:
+		remove_ollon()
+		
