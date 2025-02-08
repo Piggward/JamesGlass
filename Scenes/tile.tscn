@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://qq0s21m7tkhx"]
+[gd_scene load_steps=3 format=3 uid="uid://ccivroixink1s"]
 
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_6ohk6"]
-[ext_resource type="Material" uid="uid://bqcajjitgm3wn" path="res://Materials/tile_test_materialtres.tres" id="2_2trdj"]
-[ext_resource type="ArrayMesh" uid="uid://dqyfchoacx47y" path="res://Models/1_0.obj" id="2_70cpl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r8gbq"]
 
@@ -12,9 +10,7 @@ script = ExtResource("1_6ohk6")
 [node name="StaticBody" type="StaticBody3D" parent="."]
 
 [node name="Mesh" type="MeshInstance3D" parent="StaticBody"]
-mesh = ExtResource("2_70cpl")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_2trdj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.87945, 0)

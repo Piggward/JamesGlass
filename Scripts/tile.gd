@@ -6,15 +6,18 @@ enum TileState {GRASS, DRYWOOD, FIRE}
 var state = TileState.GRASS
 var pos: Vector3
 # neighbors
-var n_north: Tile
-var n_east: Tile
-var n_south: Tile
-var n_west: Tile
+# 0 - west
+# 1 - north
+# 2 - east
+# 3 - south
+var neighbours = [null, null, null, null]
 
 var mesh: MeshInstance3D
 
 var tile_set_number = 1
 var has_ollon = false
+
+var dry_out_rate = 2
 
 # TODO: move to game manager
 var mesh_list = [
@@ -22,7 +25,7 @@ var mesh_list = [
 	load("Models/%s_1.obj" % [tile_set_number]),
 	load("Models/%s_2.obj" % [tile_set_number]),
 	]
-var material = load("res://Materials/tile_test_materialtres.tres")
+var material = load("res://Materials/MainMaterial.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,4 +44,25 @@ func render():
 func light_fire():
 	state = TileState.FIRE
 	render()
+
+	var dried_out_tiles = []
+	# SCOPE CREEP: Use normal dist
+	var tiles_to_dry_out = randi_range(1, dry_out_rate)
+	var available_neighbours = neighbours.filter(func(n): return n != null && n.state not in [TileState.FIRE, TileState.DRYWOOD])
+	if len(available_neighbours) == 0:
+		return []
+
+	while tiles_to_dry_out != len(dried_out_tiles) && available_neighbours != []:
+		var selected_tile = randi_range(0, len(available_neighbours) - 1)
+		var tile_to_dry_out = available_neighbours[selected_tile]
+		tile_to_dry_out.dry_out()
+		dried_out_tiles.append(tile_to_dry_out)
+		available_neighbours.pop_at(selected_tile)
+	
+	return dried_out_tiles
+
+func dry_out():
+	state = TileState.DRYWOOD
+	render()
+	# TODO: rosta dina ollon
 	
