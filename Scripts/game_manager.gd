@@ -2,7 +2,8 @@ extends Node3D
 
 const TILE_SCALE = 4
 
-var TICK_IN_SECONDS = 1
+var TICK_IN_SECONDS = 0.1
+var tick_counter = 0
 
 const MAP_SIZE = 64
 const RIM_SIZE = 3
@@ -90,7 +91,23 @@ func light_shit_on_fire():
 		new_dry_tile_list.append_array(dry_tile.light_fire())
 		fire_tile_list.append(dry_tile)
 	dry_tile_list = new_dry_tile_list
+	
+func set_fire_to_trapped_grass():
+	# TODO: maybe we should just keep track of a "grass_tile_list" as well hmmmmmm :thinking:
+	for i in range(MAP_SIZE):
+		for j in range(MAP_SIZE):
+			var tile = tiles_map[i][j]
+			if tile.state != Tile.TileState.GRASS:
+				continue
+			var neighboring_tiles = tile.neighbours.filter(func(n): return n != null)
+			if neighboring_tiles.all(func(neighbor): return neighbor.state == Tile.TileState.FIRE):
+				# Surrounded by fire, so lit me up fam
+				tile.light_fire() # We don't need to append dry-tiles sinces all neighbors are on fire
+				fire_tile_list.append(tile)
 		
 	
 func _on_timer_timeout():
+	tick_counter += 1
 	light_shit_on_fire()
+	if tick_counter % 5 == 0:
+		set_fire_to_trapped_grass()
