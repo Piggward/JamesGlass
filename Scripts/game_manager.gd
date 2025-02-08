@@ -5,7 +5,7 @@ const TILE_SCALE = 2
 var TICK_IN_SECONDS = 1
 
 const MAP_SIZE = 64
-const RIM_SIZE = 32
+const RIM_SIZE = 0
 const NUM_START_FIRES = 5
 var tiles_map = []
 var fire_tile_list = []

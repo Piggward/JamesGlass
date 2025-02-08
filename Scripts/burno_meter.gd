@@ -2,7 +2,7 @@ extends ProgressBar
 
 var burn: Burn
 var progress: bool
-
+var wait_for_cd: bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var player = get_tree().get_first_node_in_group("player")
@@ -17,8 +17,13 @@ func _ready() -> void:
 func _on_burning_changed(value):
 	if value:
 		progress = true
+	else:
+		wait_for_cd = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if progress:
 		self.value = burn.current_burn_time
+		if wait_for_cd and value == 0:
+			progress = false
+			wait_for_cd = false
