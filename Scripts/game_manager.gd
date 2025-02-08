@@ -53,8 +53,10 @@ func create_rim():
 				rim_tile.state = 3
 
 			rim_tile.pos = Vector3(x * TILE_SCALE, 0, z * TILE_SCALE)
+
 			add_child(rim_tile)
-			rim_tile.fire_effect.visible = true
+			if not (z == -RIM_SIZE || z == MAP_SIZE+RIM_SIZE || x == -RIM_SIZE || x == MAP_SIZE+RIM_SIZE):
+				rim_tile.fire_effect.visible = true
 
 func connect_neighbors(tile):
 	var x = tile.pos.x / TILE_SCALE
