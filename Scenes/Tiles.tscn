@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cl12rc1p0cji3"]
 
 [ext_resource type="Material" uid="uid://dvu4jwewntfvg" path="res://Materials/MainMaterial.tres" id="1_u4rwa"]
-[ext_resource type="ArrayMesh" uid="uid://xcuk7hlq7wtj" path="res://Models/Red Tile 1.obj" id="2_sgvnu"]
-[ext_resource type="ArrayMesh" uid="uid://5iytsne584qa" path="res://Models/Green Tile 1.obj" id="3_ytgxm"]
-[ext_resource type="ArrayMesh" uid="uid://c8kpun1qtllar" path="res://Models/Orange Tile 1.obj" id="4_jy42j"]
+[ext_resource type="ArrayMesh" uid="uid://xcuk7hlq7wtj" path="res://Models/1_2.obj" id="2_sgvnu"]
+[ext_resource type="ArrayMesh" uid="uid://5iytsne584qa" path="res://Models/1_0.obj" id="3_ytgxm"]
+[ext_resource type="ArrayMesh" uid="uid://c8kpun1qtllar" path="res://Models/1_1.obj" id="4_jy42j"]
 
 [node name="10" type="Node3D"]
 

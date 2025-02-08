@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccivroixink1s"]
 
-[ext_resource type="Script" path="res://Scripts/tile.gd" id="1_6ohk6"]
+[ext_resource type="Script" path="res://Scripts/tile.gd" id="1_5bfce"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r8gbq"]
 
 [node name="Tile" type="Node3D"]
-script = ExtResource("1_6ohk6")
+script = ExtResource("1_5bfce")
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
 
