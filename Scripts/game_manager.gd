@@ -8,7 +8,7 @@ var tick_counter = 0
 const MAP_SIZE = 64
 const RIM_SIZE = 3
 const NUM_START_FIRES = 5
-const MAX_OLLON = 3
+const MAX_OLLON = 30
 
 var tiles_map = []
 var fire_tile_list = []
@@ -97,7 +97,14 @@ func light_initial_fires():
 		
 func light_shit_on_fire():
 	var new_dry_tile_list = []
+	var i = 5 + round(tick_counter/3)
+	var n = 0
+	var shuffled_dry_list = dry_tile_list
+	shuffled_dry_list.sort_custom(func(n, c): return randi_range(0, 2) == 0)
 	for dry_tile in dry_tile_list:
+		if i == n:
+			break
+		n += 1
 		if dry_tile.has_ollon:
 			ollon_tiles.pop_at(ollon_tiles.find(dry_tile))
 		new_dry_tile_list.append_array(dry_tile.light_fire())

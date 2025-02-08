@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://0rr2ng7suh5t"]
+[gd_scene load_steps=17 format=3 uid="uid://0rr2ng7suh5t"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oxsgp"]
 [ext_resource type="Script" path="res://Scripts/dash.gd" id="3_q4b36"]
@@ -53,6 +53,8 @@ _data = {
 "RESET": SubResource("Animation_irg3h"),
 "rescue": SubResource("Animation_1mh1j")
 }
+
+[sub_resource type="Environment" id="Environment_vsdr1"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -196,5 +198,12 @@ text = "DashCDMeter
 libraries = {
 "": SubResource("AnimationLibrary_60dsl")
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vsdr1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.512013, 0.858978, 0, -0.858978, 0.512013, 0, 0.727389, 0)
+shadow_enabled = true
 
 [connection signal="visibility_changed" from="Player/RayCast3D" to="Player/RayCast3D" method="_on_visibility_changed"]
