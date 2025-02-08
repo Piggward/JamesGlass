@@ -31,6 +31,7 @@ var material = load("res://Materials/MainMaterial.tres")
 func _ready():
 	mesh = $StaticBody/Mesh
 	position = pos
+	rotate_y(randi_range(0,3) * (PI/2)) # 90degrees  * 0-3
 	render()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
