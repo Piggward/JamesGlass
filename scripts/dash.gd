@@ -35,5 +35,5 @@ func _process(delta: float) -> void:
 		else:
 			elapsed_dash_time += delta
 			var progress = elapsed_dash_time / dash_duration
-			var bonus_speed = dash_bonus_speed * ease(progress, 0.2)
+			var bonus_speed = dash_bonus_speed * ease(progress, 0.1)
 			player.speed = player_speed_before_dash + bonus_speed

@@ -8,9 +8,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+	print(get_collider())
 	pass
-
-
-func _on_visibility_changed() -> void:
-	pass # Replace with function body.
