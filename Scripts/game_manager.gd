@@ -2,7 +2,7 @@ extends Node3D
 
 const TILE_SCALE = 4
 
-var TICK_IN_SECONDS = 0.1
+var TICK_IN_SECONDS = 1
 var tick_counter = 0
 
 const MAP_SIZE = 64
