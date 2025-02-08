@@ -60,8 +60,24 @@ func connect_neighbors(tile):
 
 func light_initial_fires():
 	for i in range(NUM_START_FIRES):
+		# Get a random position on the grid
 		var x = randi_range(0, MAP_SIZE-1)
 		var z = randi_range(0, MAP_SIZE-1)
+		
+		# Get the position's distance from closets wall
+		var x_dist_from_border = min(x - MAP_SIZE, MAP_SIZE - x)
+		var z_dist_from_border = min(z - MAP_SIZE, MAP_SIZE - z)
+		
+		# Move position to closets wall
+		if x_dist_from_border < z_dist_from_border:
+			z = MAP_SIZE - 1 if z > MAP_SIZE/2 else 0
+		elif z_dist_from_border < x_dist_from_border:
+			x = MAP_SIZE - 1 if x > MAP_SIZE/2 else 0
+		else:
+			if randi_range(0, 1) > 0:
+				z = MAP_SIZE - 1 if z > MAP_SIZE/2 else 0
+			else:
+				x = MAP_SIZE - 1 if x > MAP_SIZE/2 else 0
 		
 		var tile = tiles_map[z][x]
 		fire_tile_list.append(tile)
