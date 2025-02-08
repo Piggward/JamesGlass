@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlh560kwvoe0"]
 
 [ext_resource type="ArrayMesh" uid="uid://b881hhjncqmtm" path="res://Models/Zeppelinare.obj" id="1_tmq7l"]
-[ext_resource type="Material" path="res://Materials/MainMaterial.tres" id="2_8agwu"]
+[ext_resource type="Material" uid="uid://dvu4jwewntfvg" path="res://Materials/MainMaterial.tres" id="2_8agwu"]
 
 [node name="Zeppelinare" type="Node3D"]
 

@@ -5,6 +5,7 @@ extends Node
 var current_rescue_time: float
 @onready var player: Player = $".."
 
+signal ollon_rescued
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,6 +21,7 @@ func _process(delta: float) -> void:
 		current_rescue_time += delta
 		if current_rescue_time > rescue_time:
 			print("WOW U SAVED THE SQIURREL!!")
+			ollon_rescued.emit()
 			player.current_tile.has_ollon = false
 			stop_rescuing()
 	else:
