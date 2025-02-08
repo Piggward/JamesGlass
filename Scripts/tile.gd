@@ -13,6 +13,7 @@ var pos: Vector3
 var neighbours = [null, null, null, null]
 
 var mesh: MeshInstance3D
+@onready var fire_effect: Node3D = $FireEffect
 
 var tile_set_number = 1
 var has_ollon = false
@@ -45,6 +46,7 @@ func render():
 	
 func light_fire():
 	state = TileState.FIRE
+	fire_effect.visible = true
 	render()
 
 	var dried_out_tiles = []
