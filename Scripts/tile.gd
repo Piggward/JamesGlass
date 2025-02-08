@@ -14,6 +14,7 @@ var neighbours = [null, null, null, null]
 
 var mesh: MeshInstance3D
 @onready var fire_effect: Node3D = $FireEffect
+@onready var ekollon: Node3D = $Ekollon
 
 var tile_set_number = 1
 var has_ollon = false
@@ -47,6 +48,7 @@ func render():
 func light_fire():
 	state = TileState.FIRE
 	fire_effect.visible = true
+	ekollon.visible = false
 	render()
 
 	var dried_out_tiles = []
@@ -70,3 +72,6 @@ func dry_out():
 	render()
 	# TODO: rosta dina ollon
 	
+func spawn_ollon():
+	has_ollon = true
+	ekollon.visible = true

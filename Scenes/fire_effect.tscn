@@ -33,7 +33,7 @@ shader_parameter/DissolveTexture = ExtResource("2_bkadw")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.205811, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_32atm"]
+[sub_resource type="CurveTexture" id="CurveTexture_yvdmn"]
 curve = SubResource("Curve_d2vhk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3edhq"]
@@ -47,7 +47,7 @@ damping_min = 0.5
 damping_max = 1.0
 scale_min = 0.75
 scale_max = 1.5
-scale_curve = SubResource("CurveTexture_32atm")
+scale_curve = SubResource("CurveTexture_yvdmn")
 color = Color(4, 1.25, 0.6, 0.81)
 
 [sub_resource type="QuadMesh" id="QuadMesh_o34pp"]
