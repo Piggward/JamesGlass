@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlxghgbfj6s8k"]
+[gd_scene load_steps=5 format=3 uid="uid://dlxghgbfj6s8k"]
 
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_5bfce"]
+[ext_resource type="ArrayMesh" uid="uid://xcuk7hlq7wtj" path="res://Models/1_2.obj" id="2_mat8x"]
+[ext_resource type="PackedScene" uid="uid://cdayc45oewf0u" path="res://Scenes/fire_effect.tscn" id="2_xg2fg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r8gbq"]
 
@@ -10,8 +12,13 @@ script = ExtResource("1_5bfce")
 [node name="StaticBody" type="StaticBody3D" parent="."]
 
 [node name="Mesh" type="MeshInstance3D" parent="StaticBody"]
+mesh = ExtResource("2_mat8x")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.87945, 0)
 shape = SubResource("BoxShape3D_r8gbq")
+
+[node name="FireEffect" parent="." instance=ExtResource("2_xg2fg")]
+transform = Transform3D(2.26365, 0, 0, 0, 1, 0, 0, 0, 2.2255, 0, 1.51683, 0)
+visible = false
