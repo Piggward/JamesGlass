@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl12rc1p0cji3"]
+
+[ext_resource type="Material" uid="uid://dvu4jwewntfvg" path="res://Materials/MainMaterial.tres" id="1_u4rwa"]
+[ext_resource type="ArrayMesh" uid="uid://xcuk7hlq7wtj" path="res://Models/Red Tile 1.obj" id="2_sgvnu"]
+[ext_resource type="ArrayMesh" uid="uid://5iytsne584qa" path="res://Models/Green Tile 1.obj" id="3_ytgxm"]
+[ext_resource type="ArrayMesh" uid="uid://c8kpun1qtllar" path="res://Models/Orange Tile 1.obj" id="4_jy42j"]
+
+[node name="10" type="Node3D"]
+
+[node name="RedTile1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.816876, 0, 2.73954)
+material_override = ExtResource("1_u4rwa")
+mesh = ExtResource("2_sgvnu")
+
+[node name="GreenTile1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.768159, 0, 0.62302)
+material_override = ExtResource("1_u4rwa")
+mesh = ExtResource("3_ytgxm")
+
+[node name="OrangeTile1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+material_override = ExtResource("1_u4rwa")
+mesh = ExtResource("4_jy42j")
