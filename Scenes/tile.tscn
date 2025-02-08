@@ -61,6 +61,7 @@ visible = false
 
 [node name="Ekollon" parent="." instance=ExtResource("4_355ev")]
 transform = Transform3D(0.781738, 0.617739, -0.0853451, 0, 0.136857, 0.990591, 0.623607, -0.774383, 0.106987, 0, 0.0941013, 0)
+visible = false
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Ekollon"]
 transform = Transform3D(0.173739, 0.078768, -0.0663488, -0.100882, -0.03627, -0.122902, -0.140223, 0.123689, 0.00621317, 0.13445, -0.179911, 0.52173)
