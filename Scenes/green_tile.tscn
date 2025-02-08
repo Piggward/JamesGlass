@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ce0d1kowmw6yr"]
 
-[ext_resource type="ArrayMesh" uid="uid://dqyfchoacx47y" path="res://Models/1_0.obj" id="1_bs2qx"]
+[ext_resource type="ArrayMesh" uid="uid://5iytsne584qa" path="res://Models/1_0.obj" id="1_bs2qx"]
 
 [node name="GreenTile" type="Node3D"]
 
