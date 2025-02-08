@@ -37,11 +37,12 @@ point_count = 3
 curve = SubResource("Curve_d2vhk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3edhq"]
-emission_shape = 1
-emission_sphere_radius = 0.3
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
 angle_min = -360.0
 angle_max = 360.0
-gravity = Vector3(0, 3.82, 0)
+gravity = Vector3(0, 2.285, 0)
 damping_min = 0.5
 damping_max = 1.0
 scale_min = 0.75
@@ -54,6 +55,8 @@ color = Color(4, 1.25, 0.6, 0.81)
 [node name="FireEffect" type="Node3D"]
 
 [node name="staticflame" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0, 0, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_orlsb")
 amount = 1
 lifetime = 5.0
@@ -61,9 +64,9 @@ process_material = SubResource("ParticleProcessMaterial_pixqk")
 draw_pass_1 = SubResource("QuadMesh_yh4b2")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.342199, 0)
+transform = Transform3D(0.245, 0, 0, 0, 0.245, 0, 0, 0, 0.245, 0, -0.342199, 0)
 material_override = SubResource("ShaderMaterial_rpg2o")
-amount = 20
+amount = 10
 lifetime = 1.39
 process_material = SubResource("ParticleProcessMaterial_3edhq")
 draw_pass_1 = SubResource("QuadMesh_o34pp")

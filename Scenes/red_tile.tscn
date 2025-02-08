@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://kfq1ta0v4b88"]
 
-[ext_resource type="ArrayMesh" uid="uid://dekgtpuxuddv5" path="res://Models/Röd Tile.obj" id="1_u5b8w"]
+[ext_resource type="ArrayMesh" uid="uid://xcuk7hlq7wtj" path="res://Models/1_2.obj" id="1_u5b8w"]
 [ext_resource type="Material" uid="uid://bqcajjitgm3wn" path="res://Materials/tile_test_materialtres.tres" id="2_ufh82"]
 
 [node name="RedTile" type="Node3D"]
