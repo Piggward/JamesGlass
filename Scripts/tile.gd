@@ -31,6 +31,7 @@ var material = load("res://Materials/MainMaterial.tres")
 func _ready():
 	mesh = $StaticBody/Mesh
 	position = pos
+	scale = Vector3(2, 2, 2) # <---------- Doubles the size of the things 😇
 	rotate_y(randi_range(0,3) * (PI/2)) # 90degrees  * 0-3
 	render()
 
