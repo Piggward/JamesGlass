@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b881hhjncqmtm"
+path="res://.godot/imported/Zeppelinare.obj-a4684d7985ad9bff298f7b7ad2ad0dff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Zeppelinare.obj-a4684d7985ad9bff298f7b7ad2ad0dff.mesh"]
+
+source_file="res://Models/Zeppelinare.obj"
+dest_files=["res://.godot/imported/Zeppelinare.obj-a4684d7985ad9bff298f7b7ad2ad0dff.mesh", "res://.godot/imported/Zeppelinare.obj-a4684d7985ad9bff298f7b7ad2ad0dff.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

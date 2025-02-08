@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlh560kwvoe0"]
+
+[ext_resource type="ArrayMesh" uid="uid://b881hhjncqmtm" path="res://Models/Zeppelinare.obj" id="1_tmq7l"]
+[ext_resource type="Material" uid="uid://dvu4jwewntfvg" path="res://Materials/MainMaterial.tres" id="2_8agwu"]
+
+[node name="Zeppelinare" type="Node3D"]
+
+[node name="Zeppelinare" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_tmq7l")
+surface_material_override/0 = ExtResource("2_8agwu")
+surface_material_override/1 = ExtResource("2_8agwu")
+surface_material_override/2 = ExtResource("2_8agwu")
+surface_material_override/3 = ExtResource("2_8agwu")
+surface_material_override/4 = ExtResource("2_8agwu")
+surface_material_override/5 = ExtResource("2_8agwu")
+surface_material_override/6 = ExtResource("2_8agwu")
