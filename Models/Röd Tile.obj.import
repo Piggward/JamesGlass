@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dekgtpuxuddv5"
+path="res://.godot/imported/Röd Tile.obj-f4fcb23f9df5bbcbe0d7a52765e89f47.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Röd Tile.obj-f4fcb23f9df5bbcbe0d7a52765e89f47.mesh"]
+
+source_file="res://Models/Röd Tile.obj"
+dest_files=["res://.godot/imported/Röd Tile.obj-f4fcb23f9df5bbcbe0d7a52765e89f47.mesh", "res://.godot/imported/Röd Tile.obj-f4fcb23f9df5bbcbe0d7a52765e89f47.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
