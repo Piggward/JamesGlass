@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnh4a3xbx36co"]
+
+[ext_resource type="Material" uid="uid://dvu4jwewntfvg" path="res://Materials/MainMaterial.tres" id="1_vimcm"]
+[ext_resource type="ArrayMesh" uid="uid://t4qssbhkpaw1" path="res://Models/Mountain tile 1.obj" id="2_i8nkp"]
+
+[node name="MountainTile" type="Node3D"]
+
+[node name="MountainTile1" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_vimcm")
+mesh = ExtResource("2_i8nkp")

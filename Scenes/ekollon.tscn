@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtrhr23pnsafv"]
+
+[ext_resource type="Material" uid="uid://dvu4jwewntfvg" path="res://Materials/MainMaterial.tres" id="1_xdia8"]
+[ext_resource type="ArrayMesh" uid="uid://ca51mkx8fnp11" path="res://Models/Ekollon.obj" id="2_1kldv"]
+
+[sub_resource type="Animation" id="Animation_jta52"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ekollon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0272748, 0, 0.0637262)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ekollon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_04nja"]
+resource_name = "ekollon_hover"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ekollon:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0272748, 0, 0.0637262), Vector3(0.0272748, 0.0527652, 0.0637262), Vector3(0.0272748, 0, 0.0637262)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ekollon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0797266, 0, 0), Vector3(0.0797266, 0, 0), Vector3(0.0797266, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i5gn4"]
+_data = {
+"RESET": SubResource("Animation_jta52"),
+"ekollon_hover": SubResource("Animation_04nja")
+}
+
+[node name="Ekollon" type="Node3D"]
+
+[node name="Ekollon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0272748, 0, 0.0637262)
+material_override = ExtResource("1_xdia8")
+mesh = ExtResource("2_1kldv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i5gn4")
+}
