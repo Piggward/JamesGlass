@@ -60,13 +60,12 @@ transform = Transform3D(2.26365, 0, 0, 0, 1, 0, 0, 0, 2.2255, 0, 1.51683, 0)
 visible = false
 
 [node name="Ekollon" parent="." instance=ExtResource("4_355ev")]
-transform = Transform3D(1, 0, 0, 0, 0.955665, 0.294457, 0, -0.294457, 0.955665, 0, 0.260236, 0)
-visible = false
+transform = Transform3D(0.781738, 0.617739, -0.0853451, 0, 0.136857, 0.990591, 0.623607, -0.774383, 0.106987, 0, 0.0941013, 0)
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Ekollon"]
-transform = Transform3D(0.245, 0, 0, 0, 0.151059, 3.72529e-09, 0, -1.11759e-08, 0.139806, 0, 0.704349, 0.32246)
+transform = Transform3D(0.173739, 0.078768, -0.0663488, -0.100882, -0.03627, -0.122902, -0.140223, 0.123689, 0.00621317, 0.13445, -0.179911, 0.52173)
 material_override = SubResource("ShaderMaterial_1vy4u")
-amount = 5
+amount = 1
 lifetime = 1.12
 randomness = 0.22
 fixed_fps = 20

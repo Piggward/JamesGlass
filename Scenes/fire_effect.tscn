@@ -66,9 +66,9 @@ draw_pass_1 = SubResource("QuadMesh_yh4b2")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.245, 0, 0, 0, 0.47698, 0, 0, 0, 0.245, 0, -0.342199, 0)
 material_override = SubResource("ShaderMaterial_rpg2o")
-amount = 50
+amount = 20
 lifetime = 1.39
 randomness = 0.22
-fixed_fps = 20
+fixed_fps = 10
 process_material = SubResource("ParticleProcessMaterial_3edhq")
 draw_pass_1 = SubResource("QuadMesh_o34pp")
