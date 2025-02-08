@@ -25,7 +25,7 @@ var mesh_list = [
 	load("Models/%s_1.obj" % [tile_set_number]),
 	load("Models/%s_2.obj" % [tile_set_number]),
 	]
-var material = load("res://Materials/tile_test_materialtres.tres")
+var material = load("res://Materials/MainMaterial.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
