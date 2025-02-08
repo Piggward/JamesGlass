@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce0d1kowmw6yr"]
+
+[ext_resource type="ArrayMesh" uid="uid://dqyfchoacx47y" path="res://Models/Grön Tile.obj" id="1_bs2qx"]
+[ext_resource type="Material" uid="uid://bqcajjitgm3wn" path="res://Materials/tile_test_materialtres.tres" id="2_38tkq"]
+
+[node name="GreenTile" type="Node3D"]
+
+[node name="GrönTile" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_bs2qx")
+surface_material_override/0 = ExtResource("2_38tkq")
