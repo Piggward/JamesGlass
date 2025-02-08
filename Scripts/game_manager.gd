@@ -50,6 +50,9 @@ func create_rim():
 				continue
 			var rim_tile = tile_scene.instantiate()
 			rim_tile.state = 2
+			if z == -RIM_SIZE || z == MAP_SIZE+RIM_SIZE || x == -RIM_SIZE || x == MAP_SIZE+RIM_SIZE:
+				rim_tile.state = 3
+
 			rim_tile.pos = Vector3(x * TILE_SCALE, 0, z * TILE_SCALE)
 			add_child(rim_tile)
 			rim_tile.fire_effect.visible = true

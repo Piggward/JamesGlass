@@ -1,7 +1,7 @@
 class_name Tile
 extends Node3D
 
-enum TileState {GRASS, DRYWOOD, FIRE}
+enum TileState {GRASS, DRYWOOD, FIRE, MOUNTAIN}
 
 var state = TileState.GRASS
 var pos: Vector3
@@ -26,6 +26,7 @@ var mesh_list = [
 	load("Models/%s_0.obj" % [tile_set_number]),
 	load("Models/%s_1.obj" % [tile_set_number]),
 	load("Models/%s_2.obj" % [tile_set_number]),
+	load("Models/mountain_tile.obj")
 	]
 var material = load("res://Materials/MainMaterial.tres")
 
