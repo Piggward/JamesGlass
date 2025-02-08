@@ -1,7 +1,7 @@
 class_name Tile
 extends Node3D
 
-enum TileState {GRASS, DRYWOOD, FIRE}
+enum TileState {GRASS, DRYWOOD, FIRE, MOUNTAIN}
 
 var state = TileState.GRASS
 var pos: Vector3
@@ -14,6 +14,7 @@ var neighbours = [null, null, null, null]
 
 var mesh: MeshInstance3D
 @onready var fire_effect: Node3D = $FireEffect
+@onready var ekollon: Node3D = $Ekollon
 
 var tile_set_number = 1
 var has_ollon = false
@@ -25,6 +26,7 @@ var mesh_list = [
 	load("Models/%s_0.obj" % [tile_set_number]),
 	load("Models/%s_1.obj" % [tile_set_number]),
 	load("Models/%s_2.obj" % [tile_set_number]),
+	load("Models/mountain_tile.obj")
 	]
 var material = load("res://Materials/MainMaterial.tres")
 
@@ -47,6 +49,7 @@ func render():
 func light_fire():
 	state = TileState.FIRE
 	fire_effect.visible = true
+	remove_ollon()
 	render()
 
 	var dried_out_tiles = []
@@ -64,9 +67,23 @@ func light_fire():
 		available_neighbours.pop_at(selected_tile)
 	
 	return dried_out_tiles
+	
+func remove_ollon():
+	ekollon.visible = false
+	has_ollon = false
+	EventManager.ollon_aquired.disconnect(_on_ollon_aquired)
 
 func dry_out():
 	state = TileState.DRYWOOD
 	render()
 	# TODO: rosta dina ollon
 	
+func spawn_ollon():
+	has_ollon = true
+	ekollon.visible = true
+	EventManager.ollon_aquired.connect(_on_ollon_aquired)
+	
+func _on_ollon_aquired(pos: Vector3):
+	if pos == self.pos:
+		remove_ollon()
+		

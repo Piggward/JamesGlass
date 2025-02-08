@@ -1,10 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlxghgbfj6s8k"]
+[gd_scene load_steps=12 format=3 uid="uid://qq0s21m7tkhx"]
 
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_5bfce"]
 [ext_resource type="ArrayMesh" uid="uid://xcuk7hlq7wtj" path="res://Models/1_2.obj" id="2_mat8x"]
-[ext_resource type="PackedScene" uid="uid://cdayc45oewf0u" path="res://Scenes/fire_effect.tscn" id="2_xg2fg"]
+[ext_resource type="PackedScene" path="res://Scenes/fire_effect.tscn" id="2_xg2fg"]
+[ext_resource type="PackedScene" path="res://Scenes/ekollon.tscn" id="4_355ev"]
+[ext_resource type="Shader" path="res://Shaders/tile.gdshader" id="5_1s2v2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r8gbq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vy4u"]
+render_priority = 0
+shader = ExtResource("5_1s2v2")
+shader_parameter/line_color = Color(1, 0, 1, 0)
+shader_parameter/glowSize = 5.0
+shader_parameter/glowDensity = 1
+shader_parameter/glowRadialCoverage = 4
+shader_parameter/glowAngle = 1.57
+shader_parameter/glowSharpness = 5.0
+shader_parameter/alphaThreshold = 0.2
+
+[sub_resource type="Curve" id="Curve_ls0n1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.205811, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_32atm"]
+curve = SubResource("Curve_ls0n1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hfn5j"]
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -360.0
+angle_max = 360.0
+gravity = Vector3(0, 2.285, 0)
+damping_min = 0.5
+damping_max = 1.0
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_32atm")
+color = Color(0.764706, 0.309804, 0.360784, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_wi2hv"]
+uv2_padding = 3.84
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_5bfce")
@@ -22,3 +58,16 @@ shape = SubResource("BoxShape3D_r8gbq")
 [node name="FireEffect" parent="." instance=ExtResource("2_xg2fg")]
 transform = Transform3D(2.26365, 0, 0, 0, 1, 0, 0, 0, 2.2255, 0, 1.51683, 0)
 visible = false
+
+[node name="Ekollon" parent="." instance=ExtResource("4_355ev")]
+transform = Transform3D(0.781738, 0.617739, -0.0853451, 0, 0.136857, 0.990591, 0.623607, -0.774383, 0.106987, 0, 0.0941013, 0)
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Ekollon"]
+transform = Transform3D(0.173739, 0.078768, -0.0663488, -0.100882, -0.03627, -0.122902, -0.140223, 0.123689, 0.00621317, 0.13445, -0.179911, 0.52173)
+material_override = SubResource("ShaderMaterial_1vy4u")
+amount = 1
+lifetime = 1.12
+randomness = 0.22
+fixed_fps = 20
+process_material = SubResource("ParticleProcessMaterial_hfn5j")
+draw_pass_1 = SubResource("QuadMesh_wi2hv")

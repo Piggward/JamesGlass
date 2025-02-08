@@ -8,9 +8,13 @@ var tick_counter = 0
 const MAP_SIZE = 64
 const RIM_SIZE = 3
 const NUM_START_FIRES = 5
+const MAX_OLLON = 3
+
 var tiles_map = []
 var fire_tile_list = []
 var dry_tile_list = []
+var ollon_tiles = []
+
 var tile_scene = preload("res://Scenes/tile.tscn")
 
 @onready var TIMER = $Timer
@@ -20,6 +24,7 @@ func _ready():
 	create_map()
 	create_rim()
 	light_initial_fires()
+	spawn_ollon()
 	TIMER.wait_time = TICK_IN_SECONDS
 	TIMER.start()
 	
@@ -44,6 +49,9 @@ func create_rim():
 				continue
 			var rim_tile = tile_scene.instantiate()
 			rim_tile.state = 2
+			if z == -RIM_SIZE || z == MAP_SIZE+RIM_SIZE || x == -RIM_SIZE || x == MAP_SIZE+RIM_SIZE:
+				rim_tile.state = 3
+
 			rim_tile.pos = Vector3(x * TILE_SCALE, 0, z * TILE_SCALE)
 			add_child(rim_tile)
 			rim_tile.fire_effect.visible = true
@@ -88,6 +96,8 @@ func light_initial_fires():
 func light_shit_on_fire():
 	var new_dry_tile_list = []
 	for dry_tile in dry_tile_list:
+		if dry_tile.has_ollon:
+			ollon_tiles.pop_at(ollon_tiles.find(dry_tile))
 		new_dry_tile_list.append_array(dry_tile.light_fire())
 		fire_tile_list.append(dry_tile)
 	dry_tile_list = new_dry_tile_list
@@ -106,8 +116,22 @@ func set_fire_to_trapped_grass():
 				fire_tile_list.append(tile)
 		
 	
+
+func spawn_ollon():
+	if len(ollon_tiles) == MAX_OLLON:
+		return
+
+	while len(ollon_tiles) != MAX_OLLON:
+		var z = randi_range(0, MAP_SIZE-1)
+		var x = randi_range(0, MAP_SIZE-1)
+		var candidate_ollon_tile = tiles_map[z][x]
+		if candidate_ollon_tile not in fire_tile_list:
+			candidate_ollon_tile.spawn_ollon()
+			ollon_tiles.append(candidate_ollon_tile)
+
 func _on_timer_timeout():
 	tick_counter += 1
 	light_shit_on_fire()
 	if tick_counter % 5 == 0:
 		set_fire_to_trapped_grass()
+	spawn_ollon()

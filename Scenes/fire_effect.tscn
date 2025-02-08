@@ -33,7 +33,7 @@ shader_parameter/DissolveTexture = ExtResource("2_bkadw")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.205811, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_32atm"]
+[sub_resource type="CurveTexture" id="CurveTexture_yvdmn"]
 curve = SubResource("Curve_d2vhk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3edhq"]
@@ -47,7 +47,7 @@ damping_min = 0.5
 damping_max = 1.0
 scale_min = 0.75
 scale_max = 1.5
-scale_curve = SubResource("CurveTexture_32atm")
+scale_curve = SubResource("CurveTexture_yvdmn")
 color = Color(4, 1.25, 0.6, 0.81)
 
 [sub_resource type="QuadMesh" id="QuadMesh_o34pp"]
@@ -66,9 +66,9 @@ draw_pass_1 = SubResource("QuadMesh_yh4b2")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.245, 0, 0, 0, 0.47698, 0, 0, 0, 0.245, 0, -0.342199, 0)
 material_override = SubResource("ShaderMaterial_rpg2o")
-amount = 50
+amount = 20
 lifetime = 1.39
 randomness = 0.22
-fixed_fps = 20
+fixed_fps = 10
 process_material = SubResource("ParticleProcessMaterial_3edhq")
 draw_pass_1 = SubResource("QuadMesh_o34pp")
