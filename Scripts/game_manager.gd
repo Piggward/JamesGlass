@@ -2,8 +2,8 @@ extends Node3D
 
 const TILE_SCALE = 2
 
-const MAP_SIZE = 10
-const NUM_START_FIRES = 5
+const MAP_SIZE = 64
+const NUM_START_FIRES = 30
 var tiles_map = []
 var tile_scene = preload("res://Scenes/tile.tscn")
 

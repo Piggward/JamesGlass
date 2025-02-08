@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcgxw8wxm7wsr"]
 
-[ext_resource type="ArrayMesh" uid="uid://dx1xq76xh2i87" path="res://Models/Orange Tile.obj" id="1_1nnkc"]
+[ext_resource type="ArrayMesh" uid="uid://dx1xq76xh2i87" path="res://Models/1_1.obj" id="1_1nnkc"]
 [ext_resource type="Material" uid="uid://bqcajjitgm3wn" path="res://Materials/tile_test_materialtres.tres" id="2_ayibo"]
 
 [node name="OrangeTile" type="Node3D"]

@@ -1,4 +1,5 @@
 extends RayCast3D
+@onready var player: Player = $".."
 
 
 # Called when the node enters the scene tree for the first time.
@@ -8,5 +9,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(get_collider())
+	var collider = get_collider()
+	if not collider:
+		player.current_tile = null
+		return
+	var tile: Tile = collider.get_parent()
+	player.current_tile = tile
 	pass
