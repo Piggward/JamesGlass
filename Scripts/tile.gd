@@ -24,9 +24,6 @@ var mesh_list = [
 	]
 var material = load("res://Materials/tile_test_materialtres.tres")
 
-func render():
-	mesh.mesh = mesh_list[state]
-	mesh.set_surface_override_material(0, material)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	mesh = $StaticBody/Mesh
@@ -36,3 +33,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func render():
+	mesh.mesh = mesh_list[state]
+	mesh.set_surface_override_material(0, material)
+	
+func light_fire():
+	state = TileState.FIRE
+	render()
+	
