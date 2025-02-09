@@ -4,3 +4,5 @@
 
 [resource]
 albedo_texture = ExtResource("1_so34m")
+metallic_specular = 0.0
+emission_energy_multiplier = 1.54

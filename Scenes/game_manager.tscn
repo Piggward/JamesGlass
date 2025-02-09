@@ -11,10 +11,15 @@ wait_time = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 64, 100, 64)
+visible = false
 fov = 98.8
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.935789, 0.35256, 0, -0.35256, 0.935789, 0, 0.851191, 0)
+visible = false
+
+[node name="BG_MUSIC" type="AudioStreamPlayer" parent="."]
+volume_db = -14.055
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

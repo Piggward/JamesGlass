@@ -14,22 +14,55 @@ var tiles_map = []
 var fire_tile_list = []
 var dry_tile_list = []
 var ollon_tiles = []
+var projectiles = []
 
 var tile_scene = preload("res://Scenes/tile.tscn")
 @onready var control = $CanvasLayer/Control
+var projectile_scene = preload("res://Scenes/projectile.tscn")
 
 @onready var TIMER = $Timer
+@onready var bg_music: AudioStreamPlayer = $BG_MUSIC
 
+var music_by_intesity = [
+	preload("res://Sounds/main-1.wav"),
+	preload("res://Sounds/main-2.wav"),
+	preload("res://Sounds/main-3.wav"),
+	preload("res://Sounds/main-4.wav")
+]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	create_map()
 	create_rim()
 	light_initial_fires()
 	spawn_ollon()
+	spawn_projectile()
 	TIMER.wait_time = TICK_IN_SECONDS
 	TIMER.start()
 	control.create_mini_map()
+	bg_music.stream = preload("res://Sounds/main-1.wav")
+	bg_music.finished.connect(change_or_loop_music)
+	bg_music.play(0)
+
 	
+
+func spawn_projectile():
+	var player = get_parent().get_node("Player")
+	# Generate a random spawn position
+	var spawn_x = randf_range(0, 64 * 4)
+	var spawn_z = randf_range(0,64 * 4)
+	var spawn_position = Vector3(spawn_x,2, spawn_z)
+
+	# Instantiate projectile
+	var projectile = projectile_scene.instantiate()
+	add_child(projectile)
+
+	# Set position and target
+	projectile.global_position = spawn_position
+	projectile.set_target(player.global_position)  # Set direction
+
+
+
+
 func create_map():
 	for z in range(MAP_SIZE):
 		var row = []
@@ -101,7 +134,7 @@ func light_initial_fires():
 		
 func light_shit_on_fire():
 	var new_dry_tile_list = []
-	var i = 5 + round(tick_counter/3)
+	var i = 5 + floor(tick_counter/3) + floor(tick_counter/11)
 	var n = 0
 	var shuffled_dry_list = dry_tile_list
 	shuffled_dry_list.sort_custom(func(n, c): return randi_range(0, 2) == 0)
@@ -147,4 +180,21 @@ func _on_timer_timeout():
 	light_shit_on_fire()
 	if tick_counter % 5 == 0:
 		set_fire_to_trapped_grass()
+	if tick_counter % 10 == 0:
+		spawn_projectile()
 	spawn_ollon()
+	
+
+func change_or_loop_music():
+	var amount_of_fire = float(len(fire_tile_list)) / float((MAP_SIZE * MAP_SIZE))
+	print("this much fire", amount_of_fire)
+	print("this many fire tiles", len(fire_tile_list))
+	print("this map size", (MAP_SIZE * MAP_SIZE))
+	if amount_of_fire > 0.5 && bg_music.stream != music_by_intesity[3]:
+		bg_music.stream = music_by_intesity[3]
+	elif amount_of_fire > 0.25 && bg_music.stream != music_by_intesity[2]:
+		bg_music.stream = music_by_intesity[2]
+	elif amount_of_fire > 0.1 && bg_music.stream != music_by_intesity[1]:
+		bg_music.stream = music_by_intesity[1]
+	if not bg_music.is_playing():
+		bg_music.play(0)
