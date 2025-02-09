@@ -9,9 +9,9 @@ var current: int = 0
 @onready var deposit_sound_player: AudioStreamPlayer3D = $"../../Player/DepositSoundPlayer"
 
 var ollon_list: Array[TextureRect] = []
-@onready var rescue_counter = $"../RescueCounter"
 var depositing = false
 @onready var panel_container = $PanelContainer
+@onready var rescue_counter = $"../PanelContainer/RescueCounter"
 
 var jingles_to_play = 0
 var jingles_played = 0
@@ -53,7 +53,8 @@ func _deposit_ollon():
 		add_child(dp)
 		var tween = create_tween().set_parallel(true)
 		var random_time = randf_range(0.5, 1.5)
-		tween.tween_property(dp, "position", Vector2(rescue_counter.position.x, dp.position.y), random_time)
+		var right_side_of_screen = get_viewport_rect().size.x - get_viewport_rect().size.x * 0.1
+		tween.tween_property(dp, "position", Vector2(right_side_of_screen, dp.position.y), random_time)
 		tween.finished.connect(func(): dp.queue_free(); rescue_counter._on_ollon_rescued())
 	current = 0
 	depositing = false

@@ -83,33 +83,32 @@ tracks/5/keys = {
 "values": [Vector3(0.0752384, -0.616224, -0.07744)]
 }
 
-[sub_resource type="Animation" id="Animation_n0gd4"]
-resource_name = "titlescreen_boat_bob"
-length = 5.0
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_na17b"]
+resource_name = "camera_pan"
+length = 50.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Zeppelinare:position")
+tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.5, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 49.9333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.162963, 6.07, -0.0540595), Vector3(-0.162963, 5.51712, -0.0540595), Vector3(-0.162963, 6.07, -0.0540595)]
+"values": [Vector3(-4.37001, 0.76893, 7.79986), Vector3(-7.23217, 0.76893, -2.32455)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Zeppelinare:rotation")
+tracks/1/path = NodePath("Camera3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.5, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 49.9333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 1.5168, 0), Vector3(-0.00100226, 1.51681, -0.0185432), Vector3(0, 1.5168, 0)]
+"values": [Vector3(0.0752384, -0.616224, -0.07744), Vector3(0.0752382, -1.90691, -0.0774401)]
 }
 
 [sub_resource type="Animation" id="Animation_vb326"]
@@ -140,32 +139,33 @@ tracks/1/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_na17b"]
-resource_name = "camera_pan"
-length = 50.0
+[sub_resource type="Animation" id="Animation_n0gd4"]
+resource_name = "titlescreen_boat_bob"
+length = 5.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D:position")
+tracks/0/path = NodePath("Zeppelinare:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 49.9333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-4.37001, 0.76893, 7.79986), Vector3(-7.23217, 0.76893, -2.32455)]
+"values": [Vector3(-0.162963, 6.07, -0.0540595), Vector3(-0.162963, 5.51712, -0.0540595), Vector3(-0.162963, 6.07, -0.0540595)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/path = NodePath("Zeppelinare:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 49.9333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.0752384, -0.616224, -0.07744), Vector3(0.0752382, -1.90691, -0.0774401)]
+"values": [Vector3(0, 1.5168, 0), Vector3(-0.00100226, 1.51681, -0.0185432), Vector3(0, 1.5168, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fyn5t"]
@@ -707,7 +707,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_2vq7n")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.816982, 0.0198197, -0.576323, -0.0771438, 0.994182, -0.0751674, 0.57148, 0.10587, 0.813758, -4.37001, 0.76893, 7.79986)
+transform = Transform3D(0.816982, 0.0198196, -0.576323, -0.0771438, 0.994182, -0.0751674, 0.57148, 0.10587, 0.813758, -4.37001, 0.76893, 7.79986)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

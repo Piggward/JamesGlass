@@ -20,6 +20,7 @@ signal dashing_changed(value: bool)
 func _ready() -> void:
 	dash.propeller_ljud = propeller_ljud
 	original_speed = speed
+	EventManager.ollon_saved = 0
 
 func set_rescuing(value):
 	rescuing = value
@@ -43,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		dash.end_dash()
 	
 
-	if Input.is_action_just_pressed("action"):
+	if Input.is_action_just_pressed("action") and not rescuing:
 		set_rescuing(true)	
 
 		

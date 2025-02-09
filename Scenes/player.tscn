@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://0rr2ng7suh5t"]
+[gd_scene load_steps=27 format=3 uid="uid://dpjwpq4nl1ab4"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oxsgp"]
 [ext_resource type="Script" path="res://Scripts/dash.gd" id="3_q4b36"]
@@ -7,12 +7,12 @@
 [ext_resource type="PackedScene" path="res://Scenes/collect_effect.tscn" id="5_u76p8"]
 [ext_resource type="PackedScene" uid="uid://dhj8vs07o5cm4" path="res://Scenes/game_manager.tscn" id="5_xy6du"]
 [ext_resource type="Script" path="res://Scripts/burn.gd" id="6_en5rv"]
-[ext_resource type="PackedScene" path="res://Scenes/burn_lights.tscn" id="7_dwl0e"]
+[ext_resource type="PackedScene" uid="uid://bh8tg8dcd3xdc" path="res://Scenes/burn_lights.tscn" id="7_dwl0e"]
 [ext_resource type="Script" path="res://Scripts/rescue.gd" id="7_eep7a"]
 [ext_resource type="AudioStream" uid="uid://cgtu30hsh7mqy" path="res://Sounds/leave_nut_all.wav" id="9_v0wgc"]
 [ext_resource type="Script" path="res://Scripts/rescue_counter_label.gd" id="11_qii5g"]
 [ext_resource type="Script" path="res://Scripts/ollon_collector.gd" id="11_yaxka"]
-[ext_resource type="PackedScene" path="res://Scenes/ollon_icon.tscn" id="11_yujoc"]
+[ext_resource type="PackedScene" uid="uid://ccoc6a6t025my" path="res://Scenes/ollon_icon.tscn" id="11_yujoc"]
 [ext_resource type="Script" path="res://Scenes/ollon_panel.gd" id="12_xulhi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gyxdj"]
@@ -27,6 +27,13 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lroip"]
+bg_color = Color(0.239216, 0.2, 0.2, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="Animation" id="Animation_irg3h"]
 length = 0.001
@@ -184,18 +191,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, -1, -40)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="RescueCounter" type="Label" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -207.0
-offset_top = 17.0
-offset_right = -167.0
-offset_bottom = 86.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 50
-script = ExtResource("11_qii5g")
-
 [node name="OllonCollector" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -243,6 +238,26 @@ modulate = Color(1, 1, 1, 0.32549)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -507.0
+offset_top = 14.0
+offset_right = -28.0
+offset_bottom = 85.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lroip")
+
+[node name="RescueCounter" type="Label" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94902, 0.721569, 0.533333, 1)
+theme_override_font_sizes/font_size = 50
+text = "654"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_qii5g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

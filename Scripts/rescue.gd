@@ -52,7 +52,6 @@ func start_rescuing():
 func _process(delta: float) -> void:
 	if process:
 			if(player.current_tile.has_ollon):
-				print("WOW U SAVED THE SQIURREL!!")
 				rescue_sound_player.stream = rescue_sounds[randi_range(0, len(rescue_sounds)-1)]
 				rescue_sound_player.pitch_scale = randf_range(1.0, 1.5)
 				rescue_sound_player.play()
