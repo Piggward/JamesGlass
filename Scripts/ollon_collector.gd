@@ -59,7 +59,7 @@ func _deposit_ollon():
 	current = 0
 	depositing = false
 #func update_text():
-	#self.text = "Ollon collected: " + str(rescued)
+	#self.text = "Nuts collected: " + str(rescued)
 
 func play_jingle():
 	if jingles_played == jingles_to_play:
