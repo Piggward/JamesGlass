@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0rr2ng7suh5t"]
+[gd_scene load_steps=21 format=3 uid="uid://0rr2ng7suh5t"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oxsgp"]
 [ext_resource type="Script" path="res://Scripts/dash.gd" id="3_q4b36"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" path="res://Scenes/collect_effect.tscn" id="5_u76p8"]
 [ext_resource type="PackedScene" uid="uid://dhj8vs07o5cm4" path="res://Scenes/game_manager.tscn" id="5_xy6du"]
 [ext_resource type="Script" path="res://Scripts/burn.gd" id="6_en5rv"]
-[ext_resource type="PackedScene" uid="uid://bh8tg8dcd3xdc" path="res://Scenes/burn_lights.tscn" id="7_dwl0e"]
 [ext_resource type="Script" path="res://Scripts/rescue.gd" id="7_eep7a"]
 [ext_resource type="Script" path="res://Scripts/burno_meter.gd" id="9_nha7q"]
 [ext_resource type="Script" path="res://Scripts/rescue_meter.gd" id="10_4f8qy"]
@@ -33,10 +32,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 3, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/Zeppelinare:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_1mh1j"]
 resource_name = "rescue"
-length = 2.0
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,10 +55,22 @@ tracks/0/path = NodePath("Player/Zeppelinare:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.73333, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.333333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 3, 0), Vector3(0, 1.5, 0), Vector3(0, 1.5, 0)]
+"values": [Vector3(0, 3, 0), Vector3(0, 3.15493, 0), Vector3(0, 1.5, 0), Vector3(0, 1.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/Zeppelinare:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.2, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0), Vector3(-2.74618e-09, -1.5708, -0.0628668), Vector3(1.99498e-08, -1.5708, 0.47281), Vector3(0, -1.5708, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_60dsl"]
@@ -56,7 +79,16 @@ _data = {
 "rescue": SubResource("Animation_1mh1j")
 }
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_20ki8"]
+
+[sub_resource type="Sky" id="Sky_q2jnu"]
+sky_material = SubResource("PanoramaSkyMaterial_20ki8")
+
 [sub_resource type="Environment" id="Environment_vsdr1"]
+background_mode = 1
+background_color = Color(0.902517, 0.905043, 0.739199, 1)
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_q2jnu")
 ambient_light_color = Color(0.860369, 0.860369, 0.860369, 1)
 ssil_radius = 3.73
 ssil_intensity = 24.3
@@ -66,6 +98,7 @@ glow_strength = 0.7
 glow_bloom = 0.41
 glow_hdr_threshold = 1.23
 fog_enabled = true
+fog_light_color = Color(0.703773, 0.731487, 0.775035, 1)
 fog_light_energy = 0.83
 fog_density = 0.009
 
@@ -80,8 +113,8 @@ dof_blur_near_transition = 1.3
 
 [node name="Player" type="CharacterBody3D" parent="." groups=["player"]]
 script = ExtResource("1_oxsgp")
-speed = 7.0
-turn_rate = 0.015
+speed = 10.0
+turn_rate = 0.03
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 6.99638, 6.21444)
@@ -109,13 +142,15 @@ transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 0, 0, 1, -3.53299, -0.47599
 
 [node name="Burn" type="Node" parent="Player"]
 script = ExtResource("6_en5rv")
-max_burn_time = 2.0
+max_burn_time = 1.0
 
 [node name="Rescue" type="Node" parent="Player"]
 script = ExtResource("7_eep7a")
-rescue_time = 2.0
+rescue_time = 1.0
 
-[node name="BurnLights" parent="Player" instance=ExtResource("7_dwl0e")]
+[node name="rescue_sound_player" type="AudioStreamPlayer3D" parent="Player"]
+volume_db = -3.047
+unit_size = 6.19
 
 [node name="Area3D" type="Area3D" parent="."]
 
