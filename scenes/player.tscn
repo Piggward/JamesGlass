@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://0rr2ng7suh5t"]
+[gd_scene load_steps=18 format=3 uid="uid://0rr2ng7suh5t"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oxsgp"]
 [ext_resource type="Script" path="res://Scripts/dash.gd" id="3_q4b36"]
@@ -55,6 +55,23 @@ _data = {
 }
 
 [sub_resource type="Environment" id="Environment_vsdr1"]
+ambient_light_color = Color(0.860369, 0.860369, 0.860369, 1)
+ssil_radius = 3.73
+ssil_intensity = 24.3
+glow_enabled = true
+glow_intensity = 1.5
+glow_strength = 0.7
+glow_bloom = 0.41
+glow_hdr_threshold = 1.23
+fog_enabled = true
+fog_light_energy = 0.83
+fog_density = 0.009
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_nv6jq"]
+dof_blur_far_distance = 51.4
+dof_blur_far_transition = 71.72
+dof_blur_near_distance = 0.07
+dof_blur_near_transition = 1.3
 
 [node name="Node3D" type="Node3D"]
 
@@ -64,7 +81,7 @@ speed = 7.0
 turn_rate = 0.015
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 5, 2.65)
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 5.81324, 3.9123)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(0.378, 0, 0, 0, 0.378, 0, 0, 0, 0.378, 0, 0, 0)
@@ -201,9 +218,12 @@ libraries = {
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vsdr1")
+camera_attributes = SubResource("CameraAttributesPractical_nv6jq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.512013, 0.858978, 0, -0.858978, 0.512013, 0, 0.727389, 0)
+transform = Transform3D(1, 0, 0, 0, 0.899703, 0.436503, 0, -0.436503, 0.899703, 0, 0.727389, 0)
+light_color = Color(1, 0.855645, 0.685056, 1)
+light_energy = 1.242
 shadow_enabled = true
 
 [connection signal="visibility_changed" from="Player/RayCast3D" to="Player/RayCast3D" method="_on_visibility_changed"]
