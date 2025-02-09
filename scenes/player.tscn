@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/dash.gd" id="3_q4b36"]
 [ext_resource type="Script" path="res://Scripts/player_ray_cast.gd" id="4_yb2qi"]
 [ext_resource type="PackedScene" uid="uid://dlh560kwvoe0" path="res://Scenes/Zeppelinare.tscn" id="5_ebfs6"]
-[ext_resource type="PackedScene" path="res://Scenes/collect_effect.tscn" id="5_u76p8"]
+[ext_resource type="PackedScene" uid="uid://w44dpv5cxlps" path="res://Scenes/collect_effect.tscn" id="5_u76p8"]
 [ext_resource type="PackedScene" uid="uid://dhj8vs07o5cm4" path="res://Scenes/game_manager.tscn" id="5_xy6du"]
 [ext_resource type="Script" path="res://Scripts/burn.gd" id="6_en5rv"]
 [ext_resource type="PackedScene" uid="uid://bh8tg8dcd3xdc" path="res://Scenes/burn_lights.tscn" id="7_dwl0e"]

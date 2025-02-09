@@ -58,6 +58,7 @@ color = Color(5.914, 1.25, 0.6, 0.81)
 transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0, 0, 0)
 visible = false
 material_override = SubResource("ShaderMaterial_orlsb")
+emitting = false
 amount = 1
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_pixqk")
@@ -66,7 +67,7 @@ draw_pass_1 = SubResource("QuadMesh_yh4b2")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.245, 0, 0, 0, 0.47698, 0, 0, 0, 0.245, 0, -0.342199, 0)
 material_override = SubResource("ShaderMaterial_rpg2o")
-amount = 20
+amount = 5
 lifetime = 1.39
 randomness = 0.22
 fixed_fps = 10
