@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhj8vs07o5cm4"]
+[gd_scene load_steps=3 format=3 uid="uid://dhj8vs07o5cm4"]
 
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_2joac"]
+[ext_resource type="PackedScene" uid="uid://dwj8ptirm84l4" path="res://Scenes/mini_map.tscn" id="2_g0ajj"]
 
 [node name="GameManager" type="Node3D"]
 script = ExtResource("1_2joac")
@@ -10,9 +11,18 @@ wait_time = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 64, 100, 64)
+visible = false
 fov = 98.8
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.935789, 0.35256, 0, -0.35256, 0.935789, 0, 0.851191, 0)
+visible = false
+
+[node name="BG_MUSIC" type="AudioStreamPlayer" parent="."]
+volume_db = -14.055
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("2_g0ajj")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

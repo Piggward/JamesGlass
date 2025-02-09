@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 EventManager="*res://Scripts/event_manager.gd"
 
+[display]
+
+window/size/mode=3
+
 [input]
 
 dash={

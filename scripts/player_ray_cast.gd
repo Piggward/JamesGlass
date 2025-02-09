@@ -14,5 +14,11 @@ func _process(delta: float) -> void:
 		player.current_tile = null
 		return
 	var tile: Tile = collider.get_parent()
-	player.current_tile = tile
+	if tile != player.current_tile:
+		if player.current_tile:
+			player.current_tile.set_player(false)
+		player.current_tile = tile
+		
+		if player.current_tile:
+			player.current_tile.set_player(true)
 	pass

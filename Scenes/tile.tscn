@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlxghgbfj6s8k"]
+[gd_scene load_steps=13 format=3 uid="uid://dlxghgbfj6s8k"]
 
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_5bfce"]
 [ext_resource type="ArrayMesh" uid="uid://xcuk7hlq7wtj" path="res://Models/1_2.obj" id="2_mat8x"]
@@ -7,6 +7,9 @@
 [ext_resource type="Shader" path="res://Shaders/tile.gdshader" id="5_1s2v2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r8gbq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cefh7"]
+size = Vector3(1.95801, 84.666, 1.97668)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vy4u"]
 render_priority = 0
@@ -54,6 +57,11 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.87945, 0)
 shape = SubResource("BoxShape3D_r8gbq")
+
+[node name="BigTreeCollisonShape" type="CollisionShape3D" parent="StaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 41.833, -0.00579834)
+shape = SubResource("BoxShape3D_cefh7")
+disabled = true
 
 [node name="FireEffect" parent="." instance=ExtResource("2_xg2fg")]
 transform = Transform3D(2.26365, 0, 0, 0, 1, 0, 0, 0, 2.2255, 0, 1.51683, 0)

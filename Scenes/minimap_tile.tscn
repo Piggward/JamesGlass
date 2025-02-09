@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp5hwbjfbaijs"]
+
+[ext_resource type="Script" path="res://Scenes/minimap_tile.gd" id="1_ykbwr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50l5o"]
+
+[node name="Panel" type="Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_50l5o")
+script = ExtResource("1_ykbwr")

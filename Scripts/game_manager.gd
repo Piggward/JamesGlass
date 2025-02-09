@@ -5,7 +5,7 @@ const TILE_SCALE = 4
 var TICK_IN_SECONDS = 1
 var tick_counter = 0
 
-const MAP_SIZE = 64
+const MAP_SIZE = 63
 const RIM_SIZE = 3
 const NUM_START_FIRES = 5
 const MAX_OLLON = 30
@@ -17,10 +17,18 @@ var ollon_tiles = []
 var projectiles = []
 
 var tile_scene = preload("res://Scenes/tile.tscn")
+@onready var control = $CanvasLayer/Control
 var projectile_scene = preload("res://Scenes/projectile.tscn")
 
 @onready var TIMER = $Timer
+@onready var bg_music: AudioStreamPlayer = $BG_MUSIC
 
+var music_by_intesity = [
+	preload("res://Sounds/main-1.wav"),
+	preload("res://Sounds/main-2.wav"),
+	preload("res://Sounds/main-3.wav"),
+	preload("res://Sounds/main-4.wav")
+]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	create_map()
@@ -30,6 +38,11 @@ func _ready():
 	spawn_projectile()
 	TIMER.wait_time = TICK_IN_SECONDS
 	TIMER.start()
+	control.create_mini_map()
+	bg_music.stream = preload("res://Sounds/main-1.wav")
+	bg_music.finished.connect(change_or_loop_music)
+	bg_music.play(0)
+
 	
 
 func spawn_projectile():
@@ -51,10 +64,13 @@ func spawn_projectile():
 
 
 func create_map():
+	var middle_of_map = (MAP_SIZE - 1) / 2
 	for z in range(MAP_SIZE):
 		var row = []
 		for x in range(MAP_SIZE):
 			var tile = tile_scene.instantiate()
+			if z == x && z == middle_of_map: # Big Tree in the middle
+				tile.state = Tile.TileState.BASE
 			tile.pos = Vector3(x * TILE_SCALE, 0, z * TILE_SCALE)
 			add_child(tile)
 			row.append(tile)
@@ -63,6 +79,8 @@ func create_map():
 	for z in range(MAP_SIZE):
 		for x in range(MAP_SIZE):
 			connect_neighbors(tiles_map[z][x])
+			
+	
 
 func create_rim():
 	for z in range(-RIM_SIZE, MAP_SIZE+RIM_SIZE):
@@ -91,6 +109,11 @@ func connect_neighbors(tile):
 		tile.neighbours[1] = tiles_map[z-1][x]
 	if z < (MAP_SIZE - 1): # Has south neighbor
 		tile.neighbours[3] = tiles_map[z+1][x]
+		
+	if tile.state == Tile.TileState.BASE: # TODO: move me, I dont really belong here
+		for neighbor in tile.neighbours:
+			neighbor.state = Tile.TileState.LANDING
+			neighbor.render()
 
 func light_initial_fires():
 	for i in range(NUM_START_FIRES):
@@ -119,7 +142,7 @@ func light_initial_fires():
 		
 func light_shit_on_fire():
 	var new_dry_tile_list = []
-	var i = 5 + round(tick_counter/3)
+	var i = 5 + floor(tick_counter/3) + floor(tick_counter/11)
 	var n = 0
 	var shuffled_dry_list = dry_tile_list
 	shuffled_dry_list.sort_custom(func(n, c): return randi_range(0, 2) == 0)
@@ -168,3 +191,18 @@ func _on_timer_timeout():
 	if tick_counter % 10 == 0:
 		spawn_projectile()
 	spawn_ollon()
+	
+
+func change_or_loop_music():
+	var amount_of_fire = float(len(fire_tile_list)) / float((MAP_SIZE * MAP_SIZE))
+	print("this much fire", amount_of_fire)
+	print("this many fire tiles", len(fire_tile_list))
+	print("this map size", (MAP_SIZE * MAP_SIZE))
+	if amount_of_fire > 0.5 && bg_music.stream != music_by_intesity[3]:
+		bg_music.stream = music_by_intesity[3]
+	elif amount_of_fire > 0.25 && bg_music.stream != music_by_intesity[2]:
+		bg_music.stream = music_by_intesity[2]
+	elif amount_of_fire > 0.1 && bg_music.stream != music_by_intesity[1]:
+		bg_music.stream = music_by_intesity[1]
+	if not bg_music.is_playing():
+		bg_music.play(0)
