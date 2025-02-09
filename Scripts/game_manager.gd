@@ -231,7 +231,7 @@ func _on_timer_timeout():
 	light_shit_on_fire()
 	if tick_counter % 5 == 0:
 		set_fire_to_trapped_grass()
-	if tick_counter % 1 == 0:
+	if tick_counter % 10 == 0:
 		spawn_projectile()
 	spawn_ollon()
 	
