@@ -54,7 +54,14 @@ func render():
 	mesh.set_surface_override_material(0, material)
 	
 	if state == TileState.BASE:
+		scale = Vector3(5, 5, 5)
 		$StaticBody/BigTreeCollisonShape.disabled = false
+		# TODO: fix me, kanske att "Tile" ska ha en gräs-mesh hela tiden?
+		var tmp_ground = MeshInstance3D.new()
+		tmp_ground.mesh = mesh_list[0]
+		tmp_ground.set_surface_override_material(0, material)
+		tmp_ground.rotate_z(PI)
+		$StaticBody.add_child(tmp_ground)
 	if state == TileState.LANDING:
 		rotate_z(PI) # TODO: landing asset
 		$StaticBody/CollisionShape3D.disabled = true
