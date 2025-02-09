@@ -14,8 +14,10 @@ var tiles_map = []
 var fire_tile_list = []
 var dry_tile_list = []
 var ollon_tiles = []
+var projectiles = []
 
 var tile_scene = preload("res://Scenes/tile.tscn")
+var projectile_scene = preload("res://Scenes/projectile.tscn")
 
 @onready var TIMER = $Timer
 
@@ -25,9 +27,29 @@ func _ready():
 	create_rim()
 	light_initial_fires()
 	spawn_ollon()
+	spawn_projectile()
 	TIMER.wait_time = TICK_IN_SECONDS
 	TIMER.start()
 	
+
+func spawn_projectile():
+	var player = get_parent().get_node("Player")
+	# Generate a random spawn position
+	var spawn_x = randf_range(0, 64 * 4)
+	var spawn_z = randf_range(0,64 * 4)
+	var spawn_position = Vector3(spawn_x,2, spawn_z)
+
+	# Instantiate projectile
+	var projectile = projectile_scene.instantiate()
+	add_child(projectile)
+
+	# Set position and target
+	projectile.global_position = spawn_position
+	projectile.set_target(player.global_position)  # Set direction
+
+
+
+
 func create_map():
 	for z in range(MAP_SIZE):
 		var row = []
@@ -136,4 +158,6 @@ func _on_timer_timeout():
 	light_shit_on_fire()
 	if tick_counter % 5 == 0:
 		set_fire_to_trapped_grass()
+	if tick_counter % 10 == 0:
+		spawn_projectile()
 	spawn_ollon()
