@@ -210,31 +210,31 @@ theme_override_constants/separation = -17
 
 [node name="Ollon1" parent="CanvasLayer/OllonCollector/PanelContainer/HBoxContainer" instance=ExtResource("11_yujoc")]
 modulate = Color(1, 1, 1, 0.329412)
-custom_minimum_size = Vector2(75, 100)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 2
 
 [node name="Ollon2" parent="CanvasLayer/OllonCollector/PanelContainer/HBoxContainer" instance=ExtResource("11_yujoc")]
 modulate = Color(1, 1, 1, 0.32549)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 2
 
 [node name="Ollon3" parent="CanvasLayer/OllonCollector/PanelContainer/HBoxContainer" instance=ExtResource("11_yujoc")]
 modulate = Color(1, 1, 1, 0.32549)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 2
 
 [node name="Ollon4" parent="CanvasLayer/OllonCollector/PanelContainer/HBoxContainer" instance=ExtResource("11_yujoc")]
 modulate = Color(1, 1, 1, 0.32549)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 2
 
 [node name="Ollon5" parent="CanvasLayer/OllonCollector/PanelContainer/HBoxContainer" instance=ExtResource("11_yujoc")]
 modulate = Color(1, 1, 1, 0.32549)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 2
 
