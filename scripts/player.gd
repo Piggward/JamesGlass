@@ -13,9 +13,12 @@ var current_tile: Tile
 signal burning_changed(value: bool)
 signal rescuing_changed(value: bool)
 signal dashing_changed(value: bool)
+@onready var propeller_ljud: AudioStreamPlayer3D = $Zeppelinare/Zeppelinare/Propeller/PropellerLjud
 @onready var zeppelinare: Node3D = $Zeppelinare
+@onready var swing_wind: AudioStreamPlayer3D = $Zeppelinare/Zeppelinare/SwingWind
 
 func _ready() -> void:
+	dash.propeller_ljud = propeller_ljud
 	original_speed = speed
 
 func set_rescuing(value):
@@ -57,6 +60,11 @@ func _physics_process(delta: float) -> void:
 	if left or right:
 		var turn_multiplier = 1 if forward else 1
 		rotation.y += turn_rate * turn_multiplier * turn_speed_factor if left else -turn_rate * turn_multiplier * turn_speed_factor
+		if not swing_wind.is_playing():
+			swing_wind.pitch_scale = randf_range(0.9, 1.1)
+			swing_wind.play(0)
+	elif not left and not right:
+		swing_wind.stop()
 	if forward:
 		velocity = global_transform.basis * Vector3(0,0, -speed)
 	else:
