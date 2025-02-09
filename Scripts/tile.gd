@@ -69,9 +69,11 @@ func light_fire():
 	return dried_out_tiles
 	
 func remove_ollon():
-	ekollon.visible = false
-	has_ollon = false
-	EventManager.ollon_aquired.disconnect(_on_ollon_aquired)
+	if has_ollon or ekollon.visible:
+		ekollon.visible = false
+		has_ollon = false
+	if EventManager.ollon_aquired.is_connected(_on_ollon_aquired):
+		EventManager.ollon_aquired.disconnect(_on_ollon_aquired)
 
 func dry_out():
 	state = TileState.DRYWOOD
