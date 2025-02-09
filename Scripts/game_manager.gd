@@ -7,7 +7,7 @@ var tick_counter = 0
 
 const MAP_SIZE = 63
 const RIM_SIZE = 3
-const NUM_START_FIRES = 5
+const NUM_START_FIRES = 3
 const MAX_OLLON = 30
 
 var tiles_map = []
@@ -152,8 +152,9 @@ func light_shit_on_fire():
 	var i = 5 + floor(tick_counter/3) + floor(tick_counter/11)
 	var n = 0
 	var shuffled_dry_list = dry_tile_list
-	shuffled_dry_list.sort_custom(func(n, c): return randi_range(0, 2) == 0)
-	for dry_tile in dry_tile_list:
+	shuffled_dry_list.shuffle()
+	#shuffled_dry_list.sort_custom(func(n, c): return n.pos.distance_to(c.pos) == 1)
+	for dry_tile in shuffled_dry_list:
 		if i == n:
 			break
 		n += 1
@@ -186,7 +187,7 @@ func spawn_ollon():
 		var z = randi_range(0, MAP_SIZE-1)
 		var x = randi_range(0, MAP_SIZE-1)
 		var candidate_ollon_tile = tiles_map[z][x]
-		if candidate_ollon_tile not in fire_tile_list:
+		if candidate_ollon_tile not in fire_tile_list and not candidate_ollon_tile.are_neighbours_on_fire():
 			candidate_ollon_tile.spawn_ollon()
 			ollon_tiles.append(candidate_ollon_tile)
 
