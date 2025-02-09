@@ -42,7 +42,7 @@ tracks/0/path = NodePath("Player/Zeppelinare:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 2),
+"times": PackedFloat32Array(0, 1.73333, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 3, 0), Vector3(0, 1.5, 0), Vector3(0, 1.5, 0)]
@@ -89,8 +89,9 @@ shape = SubResource("CapsuleShape3D_gyxdj")
 
 [node name="Dash" type="Node" parent="Player"]
 script = ExtResource("3_q4b36")
-dash_bonus_speed = 10.0
+dash_bonus_speed = 15.0
 dash_duration = 0.6
+dash_accelleration_time_until_max_speed = 4.0
 dash_cd = 0.5
 
 [node name="RayCast3D" type="RayCast3D" parent="Player"]

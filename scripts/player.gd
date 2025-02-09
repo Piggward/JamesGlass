@@ -32,8 +32,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash"):
 		dash.dash()
 		
+	if dashing && Input.is_action_just_released("dash"):
+		dash.end_dash()
+		
 	if Input.is_action_just_pressed("action") and current_tile.has_ollon:
 		zeppelinare.rotation.x = 0
+		dash.end_dash()
 		set_rescuing(true)
 		
 		
