@@ -267,5 +267,3 @@ light_energy = 1.242
 shadow_enabled = true
 
 [connection signal="visibility_changed" from="Player/RayCast3D" to="Player/RayCast3D" method="_on_visibility_changed"]
-
-[editable path="Player/Zeppelinare"]
