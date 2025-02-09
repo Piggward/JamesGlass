@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhj8vs07o5cm4"]
+[gd_scene load_steps=4 format=3 uid="uid://dhj8vs07o5cm4"]
 
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_2joac"]
-[ext_resource type="PackedScene" uid="uid://dwj8ptirm84l4" path="res://Scenes/mini_map.tscn" id="2_g0ajj"]
+[ext_resource type="PackedScene" path="res://Scenes/mini_map.tscn" id="2_g0ajj"]
 [ext_resource type="AudioStream" uid="uid://0juy0sdno3wb" path="res://Sounds/fire.wav" id="2_o02cu"]
 
 [node name="GameManager" type="Node3D"]

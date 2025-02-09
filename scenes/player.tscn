@@ -99,6 +99,7 @@ glow_hdr_threshold = 1.23
 fog_enabled = true
 fog_light_color = Color(0.703773, 0.731487, 0.775035, 1)
 fog_light_energy = 0.83
+fog_density = 0.009
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_nv6jq"]
 dof_blur_far_enabled = true
@@ -133,7 +134,7 @@ target_position = Vector3(0, -5000, 0)
 script = ExtResource("4_yb2qi")
 
 [node name="Zeppelinare" parent="Player" instance=ExtResource("5_ebfs6")]
-transform = Transform3D(-1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, 0, 3, 0)
+transform = Transform3D(-1.267e-06, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.267e-06, 0, 3, 0)
 script = null
 
 [node name="Burn" type="Node" parent="Player"]
