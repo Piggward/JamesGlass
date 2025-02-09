@@ -7,6 +7,7 @@ var current_rescue_time: float
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
 var moving_vertically = false
 var process: bool = false
+@onready var collect_effect: Node3D = $"../Zeppelinare/CollectEffect"
 
 signal ollon_rescued
 
@@ -43,6 +44,7 @@ func _process(delta: float) -> void:
 			if(player.current_tile.has_ollon):
 				print("WOW U SAVED THE SQIURREL!!")
 				EventManager.ollon_aquired.emit(player.current_tile.pos)
+				collect_effect.emit_collect_effect()
 				player.current_tile.has_ollon = false
 			
 			current_rescue_time += delta

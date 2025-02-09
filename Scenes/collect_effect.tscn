@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://w44dpv5cxlps"]
+
+[ext_resource type="Script" path="res://Scenes/collect_effect.gd" id="1_2pxh0"]
+[ext_resource type="Shader" uid="uid://d2ajr5md2eydn" path="res://Shaders/fire_effect.tres" id="1_pyvbi"]
+[ext_resource type="Texture2D" uid="uid://bb0iwbvb68sa6" path="res://Textures/Voronoi01.png" id="2_0msva"]
+[ext_resource type="Texture2D" uid="uid://3miv2qomaaqt" path="res://Textures/Flame02.png" id="3_kfntk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbt1m"]
+render_priority = 0
+shader = ExtResource("1_pyvbi")
+shader_parameter/DissolveTiling = Vector2(1, 1)
+shader_parameter/DissolveSpeed = Vector2(0.275, 0.24)
+shader_parameter/DissolveAmount = 0.045
+shader_parameter/MainTex = ExtResource("3_kfntk")
+shader_parameter/DissolveTexture = ExtResource("2_0msva")
+
+[sub_resource type="Curve" id="Curve_cw7m7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.282609, 1), 0.0, 0.0, 0, 0, Vector2(0.978261, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cwk3v"]
+curve = SubResource("Curve_cw7m7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v5nc6"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -61.5
+angle_max = 164.5
+direction = Vector3(0, 1, 0)
+spread = 62.42
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, -20, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = -2.23517e-06
+scale_min = 0.75
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_cwk3v")
+color = Color(4, 4, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sc58e"]
+
+[node name="CollectEffect" type="Node3D"]
+script = ExtResource("1_2pxh0")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_lbt1m")
+emitting = false
+amount = 20
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_v5nc6")
+draw_pass_1 = SubResource("QuadMesh_sc58e")
