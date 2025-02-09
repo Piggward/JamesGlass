@@ -7,7 +7,7 @@ func _ready() -> void:
 	update_text()
 	pass # Replace with function body.
 
-func _on_ollon_rescued(pos: Vector3):
+func _on_ollon_rescued():
 	rescued += 1
 	update_text()
 	

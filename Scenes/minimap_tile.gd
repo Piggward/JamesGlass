@@ -10,6 +10,7 @@ var brown = "#7a5859"
 var red = "#b55945" 
 var gold = "#de9f47" 
 var gray = "#d5d6db"
+var purple = "#ADD8E6"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_color(tile)
@@ -29,9 +30,9 @@ func update_color(tile: Tile):
 	match (tile.state):
 		Tile.TileState.MOUNTAIN:
 			color = Color(gray)
-		Tile.TileState.GRASS:
+		Tile.TileState.GRASS, Tile.TileState.LANDING:
 			color = Color(green)
-		Tile.TileState.DRYWOOD:
+		Tile.TileState.DRYWOOD, Tile.TileState.FIRE:
 			color = Color(red)
-		Tile.TileState.FIRE:
-			color = Color(red)
+		Tile.TileState.BASE:
+			color = Color(purple)

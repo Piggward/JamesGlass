@@ -55,17 +55,20 @@ func render():
 	mesh.set_surface_override_material(0, material)
 	
 	if state == TileState.BASE:
-		scale = Vector3(5, 5, 5)
+		scale = Vector3(4, 4, 4)
+		$StaticBody/Mesh.scale = Vector3(2, 2, 2)
+		$StaticBody/Mesh.position += Vector3(0, -0.5, 0)
 		$StaticBody/BigTreeCollisonShape.disabled = false
 		# TODO: fix me, kanske att "Tile" ska ha en gräs-mesh hela tiden?
 		var tmp_ground = MeshInstance3D.new()
 		tmp_ground.mesh = mesh_list[0]
 		tmp_ground.set_surface_override_material(0, material)
 		tmp_ground.rotate_z(PI)
+		tmp_ground.position += Vector3(0, -0.06, 0)
 		$StaticBody.add_child(tmp_ground)
-	if state == TileState.LANDING:
-		rotate_z(PI) # TODO: landing asset
-		$StaticBody/CollisionShape3D.disabled = true
+	#if state == TileState.LANDING:
+		#rotate_z(PI) # TODO: landing asset
+		#$StaticBody/CollisionShape3D.disabled = true # Disabled because the tile is flipped
 	
 func light_fire():
 	state = TileState.FIRE
@@ -77,7 +80,7 @@ func light_fire():
 	var dried_out_tiles = []
 	# SCOPE CREEP: Use normal dist
 	var tiles_to_dry_out = randi_range(1, dry_out_rate)
-	var available_neighbours = neighbours.filter(func(n): return n != null && n.state not in [TileState.FIRE, TileState.DRYWOOD])
+	var available_neighbours = neighbours.filter(func(n): return n != null && n.state == TileState.GRASS)
 	if len(available_neighbours) == 0:
 		return []
 

@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	if not collider:
 		player.current_tile = null
 		return
-	var tile: Tile = collider.get_parent()
+	var tile: Tile = collider.get_parent()		
 	if tile != player.current_tile:
 		if player.current_tile:
 			player.current_tile.set_player(false)
@@ -23,6 +23,6 @@ func _process(delta: float) -> void:
 		if player.current_tile:
 			player.current_tile.set_player(true)
 			
-			if tile.neighour_to_base and ollon_collector.current > 0:
+			if tile.state == Tile.TileState.LANDING and ollon_collector.current > 0 and not ollon_collector.depositing:
 				ollon_collector._deposit_ollon()
 	pass

@@ -7,7 +7,7 @@ var tick_counter = 0
 
 const MAP_SIZE = 63
 const RIM_SIZE = 3
-const NUM_START_FIRES = 3
+const NUM_START_FIRES = 5
 const MAX_OLLON = 30
 
 var tiles_map = []
@@ -79,7 +79,25 @@ func create_map():
 	for z in range(MAP_SIZE):
 		for x in range(MAP_SIZE):
 			connect_neighbors(tiles_map[z][x])
-			
+	
+	# TODO: move me, I dont really belong here
+	# Det är för att göra tiledsen runtom BigTree som safeareas
+	var base_tile = tiles_map[middle_of_map][middle_of_map]
+	if base_tile.state == Tile.TileState.BASE: 
+		var mid = (MAP_SIZE - 1) / 2
+		var additional_safe_tiles = [
+			tiles_map[mid + 1][mid + 1],
+			tiles_map[mid + 1][mid - 1],
+			tiles_map[mid - 1][mid - 1],
+			tiles_map[mid - 1][mid + 1],
+		]
+		for neighbor in (base_tile.neighbours + additional_safe_tiles):
+			neighbor.state = Tile.TileState.LANDING
+			neighbor.render()
+			for add_neighbor in neighbor.neighbours:
+				if add_neighbor not in additional_safe_tiles && add_neighbor != base_tile:
+					add_neighbor.state = Tile.TileState.LANDING
+					add_neighbor.render()
 	
 
 func create_rim():
@@ -110,17 +128,6 @@ func connect_neighbors(tile):
 	if z < (MAP_SIZE - 1): # Has south neighbor
 		tile.neighbours[3] = tiles_map[z+1][x]
 		
-	if tile.state == Tile.TileState.BASE: # TODO: move me, I dont really belong here
-		var mid = (MAP_SIZE - 1) / 2
-		var diagonal_neighbors = [
-			tiles_map[mid + 1][mid + 1],
-			tiles_map[mid + 1][mid - 1],
-			tiles_map[mid - 1][mid - 1],
-			tiles_map[mid - 1][mid + 1],
-		]
-		for neighbor in tile.neighbours + diagonal_neighbors:
-			neighbor.state = Tile.TileState.LANDING
-			neighbor.render()
 
 func light_initial_fires():
 	for i in range(NUM_START_FIRES):
@@ -148,21 +155,27 @@ func light_initial_fires():
 		dry_tile_list.append_array(tile.light_fire())
 		
 func light_shit_on_fire():
-	var new_dry_tile_list = []
 	var i = 5 + floor(tick_counter/3) + floor(tick_counter/11)
 	var n = 0
-	var shuffled_dry_list = dry_tile_list
-	shuffled_dry_list.shuffle()
-	#shuffled_dry_list.sort_custom(func(n, c): return n.pos.distance_to(c.pos) == 1)
-	for dry_tile in shuffled_dry_list:
+	var random_weight_point = Vector3(
+		[0, round(MAP_SIZE/2), MAP_SIZE].pick_random(),
+		0,
+		[0, round(MAP_SIZE/2), MAP_SIZE].pick_random()
+	)
+	dry_tile_list.shuffle()
+	#shuffled_dry_list.sort_custom(
+	#	func(n, c): return n.pos.distance_to(random_weight_point) < c.pos.distance_to(random_weight_point)
+	#)
+	for dry_tile in dry_tile_list:
 		if i == n:
 			break
 		n += 1
 		if dry_tile.has_ollon:
 			ollon_tiles.pop_at(ollon_tiles.find(dry_tile))
-		new_dry_tile_list.append_array(dry_tile.light_fire())
+		dry_tile_list.append_array(dry_tile.light_fire())
 		fire_tile_list.append(dry_tile)
-	dry_tile_list = new_dry_tile_list
+	for k in range(0, n-1):
+		dry_tile_list.pop_front()
 	
 func set_fire_to_trapped_grass():
 	# TODO: maybe we should just keep track of a "grass_tile_list" as well hmmmmmm :thinking:
