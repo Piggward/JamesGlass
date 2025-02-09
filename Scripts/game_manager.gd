@@ -5,7 +5,7 @@ const TILE_SCALE = 4
 var TICK_IN_SECONDS = 1
 var tick_counter = 0
 
-const MAP_SIZE = 64
+const MAP_SIZE = 63
 const RIM_SIZE = 3
 const NUM_START_FIRES = 5
 const MAX_OLLON = 30
@@ -64,10 +64,13 @@ func spawn_projectile():
 
 
 func create_map():
+	var middle_of_map = (MAP_SIZE - 1) / 2
 	for z in range(MAP_SIZE):
 		var row = []
 		for x in range(MAP_SIZE):
 			var tile = tile_scene.instantiate()
+			if z == x && z == middle_of_map: # Big Tree in the middle
+				tile.state = Tile.TileState.BASE
 			tile.pos = Vector3(x * TILE_SCALE, 0, z * TILE_SCALE)
 			add_child(tile)
 			row.append(tile)
@@ -106,6 +109,11 @@ func connect_neighbors(tile):
 		tile.neighbours[1] = tiles_map[z-1][x]
 	if z < (MAP_SIZE - 1): # Has south neighbor
 		tile.neighbours[3] = tiles_map[z+1][x]
+		
+	if tile.state == Tile.TileState.BASE: # TODO: move me, I dont really belong here
+		for neighbor in tile.neighbours:
+			neighbor.state = Tile.TileState.LANDING
+			neighbor.render()
 
 func light_initial_fires():
 	for i in range(NUM_START_FIRES):

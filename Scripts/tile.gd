@@ -1,7 +1,7 @@
 class_name Tile
 extends Node3D
 
-enum TileState {GRASS, DRYWOOD, FIRE, MOUNTAIN}
+enum TileState {GRASS, DRYWOOD, FIRE, MOUNTAIN, BASE, LANDING}
 
 var state = TileState.GRASS
 var pos: Vector3
@@ -30,7 +30,9 @@ var mesh_list = [
 	load("Models/%s_0.obj" % [tile_set_number]),
 	load("Models/%s_1.obj" % [tile_set_number]),
 	load("Models/%s_2.obj" % [tile_set_number]),
-	load("Models/mountain_tile.obj")
+	load("Models/mountain_tile.obj"),
+	load("Models/Big tree.obj"),
+	load("Models/1_0.obj"),
 	]
 var material = load("res://Materials/MainMaterial.tres")
 
@@ -40,6 +42,7 @@ func _ready():
 	position = pos
 	scale = Vector3(2, 2, 2) # <---------- Doubles the size of the things 😇
 	rotate_y(randi_range(0,3) * (PI/2)) # 90degrees  * 0-3
+	
 	render()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,6 +52,12 @@ func _process(delta):
 func render():
 	mesh.mesh = mesh_list[state]
 	mesh.set_surface_override_material(0, material)
+	
+	if state == TileState.BASE:
+		$StaticBody/BigTreeCollisonShape.disabled = false
+	if state == TileState.LANDING:
+		rotate_z(PI) # TODO: landing asset
+		$StaticBody/CollisionShape3D.disabled = true
 	
 func light_fire():
 	state = TileState.FIRE
