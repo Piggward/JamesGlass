@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and Input.is_action_pressed("up"):
 		dash.dash()
 		
-	if dashing && Input.is_action_just_released("dash"):
+	if dashing && Input.is_action_just_released("dash") or !Input.is_action_pressed("up"):
 		dash.end_dash()
 	
 
@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		turn_speed_factor = 1
 	if left or right:
-		var turn_multiplier = 1 if forward else 1
+		var turn_multiplier = 2 if forward else 2
 		rotation.y += turn_rate * turn_multiplier * turn_speed_factor if left else -turn_rate * turn_multiplier * turn_speed_factor
 		if not swing_wind.is_playing():
 			swing_wind.pitch_scale = randf_range(0.9, 1.1)
