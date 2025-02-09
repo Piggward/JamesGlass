@@ -16,10 +16,9 @@ func _ready() -> void:
 	pass # Replace with function body.
 	
 func _on_rescuing_changed(value):
-	if value:
-		start_rescuing()
-	else:
-		stop_rescuing()
+	#if value:
+	start_rescuing()
+
 
 func stop_rescuing():
 	process = false
@@ -35,15 +34,24 @@ func start_rescuing():
 	process = true
 	moving_vertically = true
 	animation_player.play("rescue")
+	current_rescue_time = 0
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if process:
-		if player.rescuing:
-			current_rescue_time += delta
-			if current_rescue_time > rescue_time:
+			if(player.current_tile.has_ollon):
 				print("WOW U SAVED THE SQIURREL!!")
 				EventManager.ollon_aquired.emit(player.current_tile.pos)
 				player.current_tile.has_ollon = false
+			
+			current_rescue_time += delta
+			if current_rescue_time > rescue_time:
 				stop_rescuing()
+				#if(player.current_tile.has_ollon):
+				#	print("WOW U SAVED THE SQIURREL!!")
+				#	EventManager.ollon_aquired.emit(player.current_tile.pos)
+				#	player.current_tile.has_ollon = false
+					
+
+					

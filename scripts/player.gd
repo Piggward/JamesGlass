@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 @export var speed: float
+var original_speed: float
 @export var turn_rate: float
 @onready var dash: Dash = $Dash
 @onready var rescue: Rescue = $Rescue
@@ -13,6 +14,9 @@ signal burning_changed(value: bool)
 signal rescuing_changed(value: bool)
 signal dashing_changed(value: bool)
 @onready var zeppelinare: Node3D = $Zeppelinare
+
+func _ready() -> void:
+	original_speed = speed
 
 func set_rescuing(value):
 	rescuing = value
@@ -29,32 +33,30 @@ func set_burning(value):
 func _physics_process(delta: float) -> void:
 	check_tile()
 	
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and Input.is_action_pressed("up"):
 		dash.dash()
 		
 	if dashing && Input.is_action_just_released("dash"):
 		dash.end_dash()
-		
-	if Input.is_action_just_pressed("action") and current_tile.has_ollon:
-		zeppelinare.rotation.x = 0
-		dash.end_dash()
-		set_rescuing(true)
-		
-		
-	if rescuing and not Input.is_action_pressed("action"):
-		set_rescuing(false)
-		return
-	elif rescuing and Input.is_action_pressed("action") or rescue.moving_vertically:
-		return
+	
+
+	if Input.is_action_just_pressed("action"):
+		set_rescuing(true)	
+
 		
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var forward = Input.is_action_pressed("up")
 	var left = Input.is_action_pressed("left")
 	var right = Input.is_action_pressed("right")
+	var turn_speed_factor = 1
+	if(dashing):
+		turn_speed_factor = original_speed/(speed*1.5)
+	else:
+		turn_speed_factor = 1
 	if left or right:
-		var turn_multiplier = 1 if forward else 2
-		rotation.y += turn_rate * turn_multiplier if left else -turn_rate * turn_multiplier
+		var turn_multiplier = 1 if forward else 1
+		rotation.y += turn_rate * turn_multiplier * turn_speed_factor if left else -turn_rate * turn_multiplier * turn_speed_factor
 	if forward:
 		velocity = global_transform.basis * Vector3(0,0, -speed)
 	else:
