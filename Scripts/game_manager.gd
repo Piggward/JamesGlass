@@ -7,7 +7,7 @@ var tick_counter = 0
 
 const MAP_SIZE = 63
 const RIM_SIZE = 3
-const NUM_START_FIRES = 5
+const NUM_START_FIRES = 3
 const MAX_OLLON = 30
 
 var tiles_map = []
@@ -79,7 +79,25 @@ func create_map():
 	for z in range(MAP_SIZE):
 		for x in range(MAP_SIZE):
 			connect_neighbors(tiles_map[z][x])
-			
+	
+	# TODO: move me, I dont really belong here
+	# Det är för att göra tilesen runtom BigTree som safeareas
+	var base_tile = tiles_map[middle_of_map][middle_of_map]
+	if base_tile.state == Tile.TileState.BASE: 
+		var mid = (MAP_SIZE - 1) / 2
+		var additional_safe_tiles = [
+			tiles_map[mid + 1][mid + 1],
+			tiles_map[mid + 1][mid - 1],
+			tiles_map[mid - 1][mid - 1],
+			tiles_map[mid - 1][mid + 1],
+		]
+		for neighbor in (base_tile.neighbours + additional_safe_tiles):
+			neighbor.state = Tile.TileState.LANDING
+			neighbor.render()
+			for add_neighbor in neighbor.neighbours:
+				if add_neighbor not in additional_safe_tiles && add_neighbor != base_tile:
+					add_neighbor.state = Tile.TileState.LANDING
+					add_neighbor.render()
 	
 
 func create_rim():
@@ -110,17 +128,6 @@ func connect_neighbors(tile):
 	if z < (MAP_SIZE - 1): # Has south neighbor
 		tile.neighbours[3] = tiles_map[z+1][x]
 		
-	if tile.state == Tile.TileState.BASE: # TODO: move me, I dont really belong here
-		var mid = (MAP_SIZE - 1) / 2
-		var diagonal_neighbors = [
-			tiles_map[mid + 1][mid + 1],
-			tiles_map[mid + 1][mid - 1],
-			tiles_map[mid - 1][mid - 1],
-			tiles_map[mid - 1][mid + 1],
-		]
-		for neighbor in tile.neighbours + diagonal_neighbors:
-			neighbor.state = Tile.TileState.LANDING
-			neighbor.render()
 
 func light_initial_fires():
 	for i in range(NUM_START_FIRES):
@@ -152,8 +159,9 @@ func light_shit_on_fire():
 	var i = 5 + floor(tick_counter/3) + floor(tick_counter/11)
 	var n = 0
 	var shuffled_dry_list = dry_tile_list
-	shuffled_dry_list.sort_custom(func(n, c): return randi_range(0, 2) == 0)
-	for dry_tile in dry_tile_list:
+	shuffled_dry_list.shuffle()
+	#shuffled_dry_list.sort_custom(func(n, c): return n.pos.distance_to(c.pos) == 1)
+	for dry_tile in shuffled_dry_list:
 		if i == n:
 			break
 		n += 1
@@ -186,7 +194,7 @@ func spawn_ollon():
 		var z = randi_range(0, MAP_SIZE-1)
 		var x = randi_range(0, MAP_SIZE-1)
 		var candidate_ollon_tile = tiles_map[z][x]
-		if candidate_ollon_tile not in fire_tile_list:
+		if candidate_ollon_tile not in fire_tile_list and not candidate_ollon_tile.are_neighbours_on_fire():
 			candidate_ollon_tile.spawn_ollon()
 			ollon_tiles.append(candidate_ollon_tile)
 

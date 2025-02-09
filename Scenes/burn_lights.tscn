@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh8tg8dcd3xdc"]
+
+[ext_resource type="Script" path="res://Scripts/heat_light.gd" id="1_hq0c0"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5985, 2.38715)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+spot_angle = 36.43
+script = ExtResource("1_hq0c0")
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.25081, 2.5985, 0.0505808)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+spot_angle = 36.43
+script = ExtResource("1_hq0c0")
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.50345, 2.5985, 0.0505808)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+spot_angle = 36.43
+script = ExtResource("1_hq0c0")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2.5985, -2.7046)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+spot_angle = 36.43
+script = ExtResource("1_hq0c0")
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0773787, 5.06954, 0.0589176)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+spot_angle = 36.43
+script = ExtResource("1_hq0c0")
