@@ -84,6 +84,7 @@ func light_fire():
 		var selected_tile = randi_range(0, len(available_neighbours) - 1)
 		var tile_to_dry_out = available_neighbours[selected_tile]
 		tile_to_dry_out.dry_out()
+		
 		dried_out_tiles.append(tile_to_dry_out)
 		available_neighbours.pop_at(selected_tile)
 	
@@ -101,7 +102,14 @@ func dry_out():
 	state = TileState.DRYWOOD
 	render()
 	# TODO: rosta dina ollon
-	
+
+func are_neighbours_on_fire() -> bool:
+	var on_fire_count = 0
+	for neighbour in neighbours:
+		if neighbour == null or neighbour.state == TileState.FIRE:
+			on_fire_count += 1
+	return on_fire_count == 4
+
 func spawn_ollon():
 	has_ollon = true
 	ekollon.visible = true
