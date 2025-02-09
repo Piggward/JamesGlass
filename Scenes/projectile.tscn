@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck5hk1vhpydaj"]
+[gd_scene load_steps=6 format=3 uid="uid://ck5hk1vhpydaj"]
 
 [ext_resource type="Script" path="res://Scenes/projectile.gd" id="1_015xy"]
 [ext_resource type="AudioStream" uid="uid://vrmidk8y7cfm" path="res://Sounds/explosion.wav" id="2_rxkhx"]
+[ext_resource type="AudioStream" uid="uid://dmhhgqk8y4p5m" path="res://Sounds/falling_meteor.wav" id="3_x54d3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_mhkj3"]
 radius = 1.0
@@ -22,5 +23,14 @@ shape = SubResource("SphereShape3D_4byg6")
 
 [node name="ProjectileFlying" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_rxkhx")
-volume_db = -3.048
-unit_size = 15.71
+volume_db = 22.856
+unit_size = 100.0
+max_db = 3.25
+max_distance = 546.13
+
+[node name="Falling" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_x54d3")
+volume_db = -9.142
+unit_size = 100.0
+autoplay = true
+max_distance = 156.04

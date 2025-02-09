@@ -18,7 +18,7 @@ var mesh: MeshInstance3D
 @onready var fire_effect: Node3D = $FireEffect
 @onready var ekollon: Node3D = $Ekollon
 
-var tile_set_number = 1
+var tile_set_number = randi_range(1, 4)
 var has_ollon = false
 var neighour_to_base = false
 
