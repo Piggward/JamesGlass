@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://djqi1jynbpax2"]
+
+[ext_resource type="Script" path="res://Scripts/shadow.gd" id="1_dxpw5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x03ir"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8cf2t"]
+material = SubResource("StandardMaterial3D_x03ir")
+bottom_radius = 2.0
+height = 0.001
+rings = 1
+
+[node name="Shadow" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108588, -3.76534, -0.503124)
+mesh = SubResource("CylinderMesh_8cf2t")
+script = ExtResource("1_dxpw5")
+
+[node name="Outline" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245485, 0, 0)
+mesh = SubResource("CylinderMesh_8cf2t")
+skeleton = NodePath("../..")

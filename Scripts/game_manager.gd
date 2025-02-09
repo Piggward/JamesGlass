@@ -19,6 +19,7 @@ var projectiles = []
 var tile_scene = preload("res://Scenes/tile.tscn")
 @onready var control = $CanvasLayer/Control
 var projectile_scene = preload("res://Scenes/projectile.tscn")
+var projectile_shadow_scene = preload("res://Scenes/shadow.tscn")
 
 @onready var TIMER = $Timer
 @onready var bg_music: AudioStreamPlayer = $BG_MUSIC
@@ -32,13 +33,19 @@ var music_by_intesity = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	create_map()
+	print("Map created")
 	create_rim()
+	print("Rim created")
 	light_initial_fires()
+	print("Initial fires lit")
 	spawn_ollon()
-	spawn_projectile()
+	print("Ollon spawned")
+	
+	#spawn_projectile()
 	TIMER.wait_time = TICK_IN_SECONDS
 	TIMER.start()
 	control.create_mini_map()
+	print("Minimap created")
 	bg_music.stream = preload("res://Sounds/main-1.wav")
 	bg_music.finished.connect(change_or_loop_music)
 	bg_music.play(0)
@@ -48,20 +55,35 @@ func _ready():
 func spawn_projectile():
 	var player = get_parent().get_node("Player")
 	# Generate a random spawn position
-	var spawn_x = randf_range(0, 64 * 4)
-	var spawn_z = randf_range(0,64 * 4)
-	var spawn_position = Vector3(spawn_x,2, spawn_z)
+	var spawn_x = randi_range(0, MAP_SIZE * TILE_SCALE)
+	var spawn_z = randi_range(0, MAP_SIZE * TILE_SCALE)
+	var spawn_position = Vector3(spawn_x, 64, spawn_z)
 
+	#randomize target direction
+	print("player position", player.current_tile)
+	var variation = 10
+	var selected_target_tile = player.current_tile
+	var neighbours_left_to_explore = randi_range(0, 2)
+	while neighbours_left_to_explore > 0:
+		selected_target_tile = selected_target_tile.select_random_neighbour()
+		neighbours_left_to_explore -= 1
+
+	var shadow = projectile_shadow_scene.instantiate()
+	add_child(shadow)
+	shadow.position = Vector3(
+		selected_target_tile.position.x, 
+		selected_target_tile.position.y + 0.5,
+		selected_target_tile.position.z,
+	) 
 	# Instantiate projectile
 	var projectile = projectile_scene.instantiate()
 	add_child(projectile)
 
 	# Set position and target
-	projectile.global_position = spawn_position
-	projectile.set_target(player.global_position)  # Set direction
-
-
-
+	projectile.position = spawn_position
+	projectile.set_target(shadow.position)  # Set direction
+	projectile.my_shadow = shadow
+	projectile.target_tile = selected_target_tile
 
 func create_map():
 	var middle_of_map = (MAP_SIZE - 1) / 2
@@ -209,16 +231,16 @@ func _on_timer_timeout():
 	light_shit_on_fire()
 	if tick_counter % 5 == 0:
 		set_fire_to_trapped_grass()
-	if tick_counter % 10 == 0:
+	if tick_counter % 1 == 0:
 		spawn_projectile()
 	spawn_ollon()
 	
 
 func change_or_loop_music():
 	var amount_of_fire = float(len(fire_tile_list)) / float((MAP_SIZE * MAP_SIZE))
-	print("this much fire", amount_of_fire)
-	print("this many fire tiles", len(fire_tile_list))
-	print("this map size", (MAP_SIZE * MAP_SIZE))
+	#print("this much fire", amount_of_fire)
+	#print("this many fire tiles", len(fire_tile_list))
+	#print("this map size", (MAP_SIZE * MAP_SIZE))
 	if amount_of_fire > 0.5 && bg_music.stream != music_by_intesity[3]:
 		bg_music.stream = music_by_intesity[3]
 	elif amount_of_fire > 0.25 && bg_music.stream != music_by_intesity[2]:

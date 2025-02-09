@@ -70,13 +70,14 @@ func render():
 		#rotate_z(PI) # TODO: landing asset
 		#$StaticBody/CollisionShape3D.disabled = true # Disabled because the tile is flipped
 	
-func light_fire():
+func light_fire(should_dry_out = true):
 	state = TileState.FIRE
 	fire_effect.visible = true
 	remove_ollon()
 	render()
 	state_changed()
-
+	if not should_dry_out:
+		return []
 	var dried_out_tiles = []
 	# SCOPE CREEP: Use normal dist
 	var tiles_to_dry_out = randi_range(1, dry_out_rate)
@@ -113,6 +114,12 @@ func are_neighbours_on_fire() -> bool:
 		if neighbour == null or neighbour.state == TileState.FIRE:
 			on_fire_count += 1
 	return on_fire_count == 4
+
+func select_random_neighbour() -> Tile:
+	var return_value: Tile
+	while return_value == null:
+		return_value = neighbours.pick_random()
+	return return_value
 
 func spawn_ollon():
 	has_ollon = true
