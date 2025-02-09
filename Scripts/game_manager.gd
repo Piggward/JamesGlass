@@ -20,6 +20,7 @@ var tile_scene = preload("res://Scenes/tile.tscn")
 @onready var control = $CanvasLayer/Control
 var projectile_scene = preload("res://Scenes/projectile.tscn")
 var projectile_shadow_scene = preload("res://Scenes/shadow.tscn")
+var base_tile_position: Vector3
 
 @onready var TIMER = $Timer
 @onready var bg_music: AudioStreamPlayer = $BG_MUSIC
@@ -63,10 +64,18 @@ func spawn_projectile():
 	print("player position", player.current_tile)
 	var variation = 10
 	var selected_target_tile = player.current_tile
+	var too_close_to_base = true
+	while too_close_to_base:
+		if base_tile_position.distance_to(selected_target_tile.position) < 4*TILE_SCALE:
+			selected_target_tile = selected_target_tile.select_random_neighbour()
+		else:
+			too_close_to_base = false
+
 	var neighbours_left_to_explore = randi_range(0, 2)
 	while neighbours_left_to_explore > 0:
 		selected_target_tile = selected_target_tile.select_random_neighbour()
-		neighbours_left_to_explore -= 1
+		if selected_target_tile.state in [0, 1]:
+			neighbours_left_to_explore -= 1
 
 	var shadow = projectile_shadow_scene.instantiate()
 	add_child(shadow)
@@ -105,6 +114,7 @@ func create_map():
 	# TODO: move me, I dont really belong here
 	# Det är för att göra tiledsen runtom BigTree som safeareas
 	var base_tile = tiles_map[middle_of_map][middle_of_map]
+	base_tile_position = base_tile.position
 	if base_tile.state == Tile.TileState.BASE: 
 		var mid = (MAP_SIZE - 1) / 2
 		var additional_safe_tiles = [
