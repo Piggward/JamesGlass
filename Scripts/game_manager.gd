@@ -16,6 +16,7 @@ var dry_tile_list = []
 var ollon_tiles = []
 
 var tile_scene = preload("res://Scenes/tile.tscn")
+@onready var control = $CanvasLayer/Control
 
 @onready var TIMER = $Timer
 
@@ -27,6 +28,7 @@ func _ready():
 	spawn_ollon()
 	TIMER.wait_time = TICK_IN_SECONDS
 	TIMER.start()
+	control.create_mini_map()
 	
 func create_map():
 	for z in range(MAP_SIZE):
@@ -41,6 +43,8 @@ func create_map():
 	for z in range(MAP_SIZE):
 		for x in range(MAP_SIZE):
 			connect_neighbors(tiles_map[z][x])
+			
+	
 
 func create_rim():
 	for z in range(-RIM_SIZE, MAP_SIZE+RIM_SIZE):
