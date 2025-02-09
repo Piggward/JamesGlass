@@ -24,7 +24,9 @@ func _on_rescuing_changed(value):
 func stop_rescuing():
 	process = false
 	animation_player.play_backwards("rescue")
+	animation_player.speed_scale = 2
 	await animation_player.animation_finished
+	animation_player.speed_scale = 1
 	moving_vertically = false
 	player.rescuing = false
 	current_rescue_time = 0
