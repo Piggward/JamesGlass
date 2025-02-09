@@ -15,7 +15,11 @@ func _process(delta: float) -> void:
 	if player.burning:
 		current_burn_time += delta
 		if current_burn_time > max_burn_time:
-			node_3d.process_mode = Node.PROCESS_MODE_DISABLED
+			# Jag lämnar gamla overlay koden ifall vi vill gå tillbaka att göra nåt sånt ist :D 
+			#panel.visible = true
+			#node_3d.process_mode = Node.PROCESS_MODE_DISABLED
+			get_tree().change_scene_to_file("res://Scenes/end_screen.tscn")
+			
 	elif current_burn_time > 0:
 		current_burn_time -= delta
 	pass
