@@ -4,6 +4,7 @@ extends Control
 var width: float
 var height: float
 var tile_map = []
+const MARGIN = 10
 @onready var v_box_container = $VBoxContainer
 const MINIMAP_HBOX = preload("res://Scenes/minimap_hbox.tscn")
 
@@ -11,6 +12,11 @@ func create_mini_map():
 	var tile_map = game_manager.tiles_map
 	var rows = tile_map.size()
 	var columns = tile_map[0].size()
+	
+	var viewport = get_viewport_rect()
+	
+	self.size.x = viewport.size.x - self.position.x - MARGIN
+	self.size.y = viewport.size.y - self.position.y - MARGIN
 	
 	var single_width = self.size.x / columns
 	var single_height = self.size.y / rows
