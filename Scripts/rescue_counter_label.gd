@@ -12,4 +12,4 @@ func _on_ollon_rescued():
 	update_text()
 	
 func update_text():
-	self.text = "Ollon collected: " + str(rescued)
+	self.text = "Nuts collected: " + str(rescued)
