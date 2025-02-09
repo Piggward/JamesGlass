@@ -52,6 +52,12 @@ func _ready():
 	bg_music.play(0)
 
 	
+	
+func spawn_projectiles():
+	var number = randi_range(1,3)
+	for i in range(number):
+		spawn_projectile()
+
 
 func spawn_projectile():
 	var player = get_parent().get_node("Player")
@@ -241,8 +247,8 @@ func _on_timer_timeout():
 	light_shit_on_fire()
 	if tick_counter % 5 == 0:
 		set_fire_to_trapped_grass()
-	if tick_counter % 10 == 0:
-		spawn_projectile()
+	if tick_counter % 5 == 0:
+		spawn_projectiles()
 	spawn_ollon()
 	
 
