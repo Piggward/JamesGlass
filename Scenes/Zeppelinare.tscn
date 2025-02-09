@@ -1,9 +1,26 @@
-[gd_scene load_steps=11 format=3 uid="uid://dlh560kwvoe0"]
+[gd_scene load_steps=13 format=3 uid="uid://dlh560kwvoe0"]
 
 [ext_resource type="Script" path="res://Scenes/zeppelinare_animation.gd" id="1_lb42q"]
 [ext_resource type="ArrayMesh" uid="uid://b881hhjncqmtm" path="res://Models/Zeppelinare.obj" id="1_tmq7l"]
 [ext_resource type="Material" uid="uid://dvu4jwewntfvg" path="res://Materials/MainMaterial.tres" id="2_8agwu"]
 [ext_resource type="ArrayMesh" uid="uid://crfuy60i7f45x" path="res://Models/Propeller.obj" id="3_hg25f"]
+[ext_resource type="AudioStream" uid="uid://bolal5qyxeqx7" path="res://Sounds/propeller.wav" id="5_3uugn"]
+[ext_resource type="AudioStream" uid="uid://hyq2o3jphyrb" path="res://Sounds/zepp_swing.wav" id="6_g6ufr"]
+
+[sub_resource type="Animation" id="Animation_j8siu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Zeppelinare/Propeller:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_htq4h"]
 resource_name = "propeller_idle"
@@ -21,12 +38,18 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(6.28319, 0, 0), Vector3(12.5664, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_j8siu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4dodq"]
+_data = {
+"RESET": SubResource("Animation_j8siu"),
+"propeller_idle": SubResource("Animation_htq4h")
+}
+
+[sub_resource type="Animation" id="Animation_w14w6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Zeppelinare/Propeller:rotation")
+tracks/0/path = NodePath("Zeppelinare:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,11 +58,17 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4dodq"]
-_data = {
-"RESET": SubResource("Animation_j8siu"),
-"propeller_idle": SubResource("Animation_htq4h")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Zeppelinare:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_q4k4f"]
@@ -71,33 +100,6 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -0.0285361), Vector3(0.00987856, -5.19129e-12, 0.0211969), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_w14w6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Zeppelinare:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Zeppelinare:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gpyxh"]
 _data = {
 "RESET": SubResource("Animation_w14w6"),
@@ -108,7 +110,6 @@ _data = {
 script = ExtResource("1_lb42q")
 
 [node name="Zeppelinare" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("1_tmq7l")
 surface_material_override/0 = ExtResource("2_8agwu")
 surface_material_override/1 = ExtResource("2_8agwu")
@@ -124,11 +125,19 @@ material_override = ExtResource("2_8agwu")
 mesh = ExtResource("3_hg25f")
 skeleton = NodePath("../..")
 
+[node name="PropellerLjud" type="AudioStreamPlayer3D" parent="Zeppelinare/Propeller"]
+stream = ExtResource("5_3uugn")
+volume_db = -7.619
+autoplay = true
+
 [node name="Propeller animation" type="AnimationPlayer" parent="Zeppelinare"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_4dodq")
 }
+
+[node name="SwingWind" type="AudioStreamPlayer3D" parent="Zeppelinare"]
+stream = ExtResource("6_g6ufr")
 
 [node name="zeppelinareAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
