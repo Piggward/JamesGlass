@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="JamesGlass"
-run/main_scene="res://Scenes/start_Screen.tscn"
+run/main_scene="res://Scenes/title_screen_squirrels.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
