@@ -7,7 +7,7 @@ var tick_counter = 0
 
 const MAP_SIZE = 63
 const RIM_SIZE = 3
-const NUM_START_FIRES = 3
+const NUM_START_FIRES = 5
 const MAX_OLLON = 30
 
 var tiles_map = []
@@ -155,21 +155,27 @@ func light_initial_fires():
 		dry_tile_list.append_array(tile.light_fire())
 		
 func light_shit_on_fire():
-	var new_dry_tile_list = []
 	var i = 5 + floor(tick_counter/3) + floor(tick_counter/11)
 	var n = 0
-	var shuffled_dry_list = dry_tile_list
-	shuffled_dry_list.shuffle()
-	#shuffled_dry_list.sort_custom(func(n, c): return n.pos.distance_to(c.pos) == 1)
-	for dry_tile in shuffled_dry_list:
+	var random_weight_point = Vector3(
+		[0, round(MAP_SIZE/2), MAP_SIZE].pick_random(),
+		0,
+		[0, round(MAP_SIZE/2), MAP_SIZE].pick_random()
+	)
+	dry_tile_list.shuffle()
+	#shuffled_dry_list.sort_custom(
+	#	func(n, c): return n.pos.distance_to(random_weight_point) < c.pos.distance_to(random_weight_point)
+	#)
+	for dry_tile in dry_tile_list:
 		if i == n:
 			break
 		n += 1
 		if dry_tile.has_ollon:
 			ollon_tiles.pop_at(ollon_tiles.find(dry_tile))
-		new_dry_tile_list.append_array(dry_tile.light_fire())
+		dry_tile_list.append_array(dry_tile.light_fire())
 		fire_tile_list.append(dry_tile)
-	dry_tile_list = new_dry_tile_list
+	for k in range(0, n-1):
+		dry_tile_list.pop_front()
 	
 func set_fire_to_trapped_grass():
 	# TODO: maybe we should just keep track of a "grass_tile_list" as well hmmmmmm :thinking:
