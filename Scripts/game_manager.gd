@@ -81,7 +81,7 @@ func create_map():
 			connect_neighbors(tiles_map[z][x])
 	
 	# TODO: move me, I dont really belong here
-	# Det är för att göra tilesen runtom BigTree som safeareas
+	# Det är för att göra tiledsen runtom BigTree som safeareas
 	var base_tile = tiles_map[middle_of_map][middle_of_map]
 	if base_tile.state == Tile.TileState.BASE: 
 		var mid = (MAP_SIZE - 1) / 2

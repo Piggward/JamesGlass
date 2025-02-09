@@ -65,9 +65,9 @@ func render():
 		tmp_ground.rotate_z(PI)
 		tmp_ground.position += Vector3(0, -0.06, 0)
 		$StaticBody.add_child(tmp_ground)
-	if state == TileState.LANDING:
-		rotate_z(PI) # TODO: landing asset
-		$StaticBody/CollisionShape3D.disabled = true # Disabled because the tile is flipped
+	#if state == TileState.LANDING:
+		#rotate_z(PI) # TODO: landing asset
+		#$StaticBody/CollisionShape3D.disabled = true # Disabled because the tile is flipped
 	
 func light_fire():
 	state = TileState.FIRE
