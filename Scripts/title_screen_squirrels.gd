@@ -10,6 +10,7 @@ func _ready() -> void:
 	#animation_player1.play("Squirrel 1 | Menu_screen_1")
 	#animation_player2.play("Squirrel 1 | Menu_screen_2")
 	animation_boat.play("titlescreen_boat_bob")
+	animation_boat.play("camera_pan")
 	pass
 
 
