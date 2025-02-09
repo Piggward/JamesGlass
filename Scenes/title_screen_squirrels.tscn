@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dtjtp1mpwjlwe"]
+[gd_scene load_steps=16 format=3 uid="uid://dtjtp1mpwjlwe"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen_squirrels.gd" id="1_0e7ay"]
 [ext_resource type="PackedScene" uid="uid://5at2ll0k0i1k" path="res://Models/squirrel.fbx" id="1_ayrhd"]
@@ -6,6 +6,8 @@
 [ext_resource type="ArrayMesh" uid="uid://b881hhjncqmtm" path="res://Models/Zeppelinare.obj" id="3_x3u4j"]
 [ext_resource type="ArrayMesh" uid="uid://ca51mkx8fnp11" path="res://Models/Ekollon.obj" id="5_krpas"]
 [ext_resource type="PackedScene" uid="uid://baivwbvmk57m8" path="res://Scenes/canvas_layer_start_screen.tscn" id="6_a8dno"]
+[ext_resource type="AudioStream" uid="uid://cq5pr6o1exq6w" path="res://Sounds/frontscreen.mp3" id="7_p07yc"]
+[ext_resource type="AudioStream" uid="uid://diqgx48n1wdvy" path="res://Sounds/introtest.mp3" id="7_wa38b"]
 
 [sub_resource type="Animation" id="Animation_hsa8f"]
 length = 0.001
@@ -181,6 +183,30 @@ background_mode = 1
 background_color = Color(0.737028, 0.894528, 1, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_tsq5q"]
+clip_count = 2
+clip_0/name = &"intro"
+clip_0/stream = ExtResource("7_wa38b")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"loop"
+clip_1/stream = ExtResource("7_p07yc")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 0): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(0, 1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+}
+}
 
 [node name="TitleScreenSquirrels" type="Node3D"]
 script = ExtResource("1_0e7ay")
@@ -718,6 +744,11 @@ libraries = {
 environment = SubResource("Environment_uq4xb")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("6_a8dno")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_tsq5q")
+volume_db = -3.081
+autoplay = true
 
 [editable path="Zeppelinare/squirrel2"]
 [editable path="Zeppelinare/squirrel"]
