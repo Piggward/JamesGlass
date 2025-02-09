@@ -20,6 +20,7 @@ var mesh: MeshInstance3D
 
 var tile_set_number = 1
 var has_ollon = false
+var neighour_to_base = false
 
 var dry_out_rate = 2
 

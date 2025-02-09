@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccoc6a6t025my"]
+
+[ext_resource type="Texture2D" uid="uid://bcoh14okly0me" path="res://Textures/ollon.psd.png" id="1_804e8"]
+
+[node name="TextureRect" type="TextureRect"]
+offset_right = 837.0
+offset_bottom = 616.0
+scale = Vector2(0.141288, 0.141288)
+texture = ExtResource("1_804e8")

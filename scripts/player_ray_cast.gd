@@ -1,5 +1,6 @@
 extends RayCast3D
 @onready var player: Player = $".."
+@onready var ollon_collector = $"../../CanvasLayer/OllonCollector"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,4 +22,7 @@ func _process(delta: float) -> void:
 		
 		if player.current_tile:
 			player.current_tile.set_player(true)
+			
+			if tile.neighour_to_base and ollon_collector.current > 0:
+				ollon_collector._deposit_ollon()
 	pass

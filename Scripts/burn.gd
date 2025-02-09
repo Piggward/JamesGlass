@@ -4,7 +4,6 @@ extends Node
 @onready var player: Player = $".."
 @export var max_burn_time: float
 var current_burn_time: float = 0.0
-@onready var panel: Panel = $"../../CanvasLayer/Panel"
 @onready var node_3d: Node3D = $"../.."
 
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +15,6 @@ func _process(delta: float) -> void:
 	if player.burning:
 		current_burn_time += delta
 		if current_burn_time > max_burn_time:
-			panel.visible = true
 			node_3d.process_mode = Node.PROCESS_MODE_DISABLED
 	elif current_burn_time > 0:
 		current_burn_time -= delta
