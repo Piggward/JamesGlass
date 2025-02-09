@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/dash.gd" id="3_q4b36"]
 [ext_resource type="Script" path="res://Scripts/player_ray_cast.gd" id="4_yb2qi"]
 [ext_resource type="PackedScene" uid="uid://dlh560kwvoe0" path="res://Scenes/Zeppelinare.tscn" id="5_ebfs6"]
-[ext_resource type="PackedScene" path="res://Scenes/collect_effect.tscn" id="5_u76p8"]
+[ext_resource type="PackedScene" uid="uid://w44dpv5cxlps" path="res://Scenes/collect_effect.tscn" id="5_u76p8"]
 [ext_resource type="PackedScene" uid="uid://dhj8vs07o5cm4" path="res://Scenes/game_manager.tscn" id="5_xy6du"]
 [ext_resource type="Script" path="res://Scripts/burn.gd" id="6_en5rv"]
 [ext_resource type="Script" path="res://Scripts/rescue.gd" id="7_eep7a"]
@@ -103,7 +103,6 @@ fog_light_energy = 0.83
 fog_density = 0.009
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_nv6jq"]
-dof_blur_far_enabled = true
 dof_blur_far_distance = 180.05
 dof_blur_far_transition = 4556.31
 dof_blur_near_distance = 0.07
@@ -136,6 +135,7 @@ script = ExtResource("4_yb2qi")
 
 [node name="Zeppelinare" parent="Player" instance=ExtResource("5_ebfs6")]
 transform = Transform3D(-1.267e-06, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.267e-06, 0, 3, 0)
+script = null
 
 [node name="CollectEffect" parent="Player/Zeppelinare" instance=ExtResource("5_u76p8")]
 transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 0, 0, 1, -3.53299, -0.475991, -0.683801)
@@ -147,10 +147,6 @@ max_burn_time = 1.0
 [node name="Rescue" type="Node" parent="Player"]
 script = ExtResource("7_eep7a")
 rescue_time = 1.0
-
-[node name="rescue_sound_player" type="AudioStreamPlayer3D" parent="Player"]
-volume_db = -3.047
-unit_size = 6.19
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -271,3 +267,5 @@ light_energy = 1.242
 shadow_enabled = true
 
 [connection signal="visibility_changed" from="Player/RayCast3D" to="Player/RayCast3D" method="_on_visibility_changed"]
+
+[editable path="Player/Zeppelinare"]
