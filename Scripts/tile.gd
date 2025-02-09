@@ -20,6 +20,7 @@ var mesh: MeshInstance3D
 
 var tile_set_number = 1
 var has_ollon = false
+var neighour_to_base = false
 
 var dry_out_rate = 2
 
@@ -65,17 +66,18 @@ func render():
 		tmp_ground.rotate_z(PI)
 		tmp_ground.position += Vector3(0, -0.06, 0)
 		$StaticBody.add_child(tmp_ground)
-	if state == TileState.LANDING:
-		rotate_z(PI) # TODO: landing asset
-		$StaticBody/CollisionShape3D.disabled = true # Disabled because the tile is flipped
+	#if state == TileState.LANDING:
+		#rotate_z(PI) # TODO: landing asset
+		#$StaticBody/CollisionShape3D.disabled = true # Disabled because the tile is flipped
 	
-func light_fire():
+func light_fire(should_dry_out = true):
 	state = TileState.FIRE
 	fire_effect.visible = true
 	remove_ollon()
 	render()
 	state_changed()
-
+	if not should_dry_out:
+		return []
 	var dried_out_tiles = []
 	# SCOPE CREEP: Use normal dist
 	var tiles_to_dry_out = randi_range(1, dry_out_rate)
@@ -112,6 +114,12 @@ func are_neighbours_on_fire() -> bool:
 		if neighbour == null or neighbour.state == TileState.FIRE:
 			on_fire_count += 1
 	return on_fire_count == 4
+
+func select_random_neighbour() -> Tile:
+	var return_value: Tile
+	while return_value == null:
+		return_value = neighbours.pick_random()
+	return return_value
 
 func spawn_ollon():
 	has_ollon = true
