@@ -111,7 +111,14 @@ func connect_neighbors(tile):
 		tile.neighbours[3] = tiles_map[z+1][x]
 		
 	if tile.state == Tile.TileState.BASE: # TODO: move me, I dont really belong here
-		for neighbor in tile.neighbours:
+		var mid = (MAP_SIZE - 1) / 2
+		var diagonal_neighbors = [
+			tiles_map[mid + 1][mid + 1],
+			tiles_map[mid + 1][mid - 1],
+			tiles_map[mid - 1][mid - 1],
+			tiles_map[mid - 1][mid + 1],
+		]
+		for neighbor in tile.neighbours + diagonal_neighbors:
 			neighbor.state = Tile.TileState.LANDING
 			neighbor.render()
 
