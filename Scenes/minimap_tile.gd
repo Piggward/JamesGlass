@@ -11,6 +11,8 @@ var red = "#b55945"
 var gold = "#de9f47" 
 var gray = "#d5d6db"
 var purple = "#ADD8E6"
+var offset = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_color(tile)
@@ -21,7 +23,19 @@ func _ready():
 
 func update_color(tile: Tile):
 	if tile.has_player:
+		var camera = get_tree().get_first_node_in_group("minimap_camera")
+		var minimap = get_tree().get_first_node_in_group("minimap")
+		if camera.initial_offset == Vector2.ZERO:
+			camera.initial_offset = self.global_position
 		color = Color(gold)
+		camera.global_position = Vector2(self.global_position.x, global_position.y)
+		#minimap.chill = true
+		#var rot = minimap.rotation
+		#minimap.rotation = 0
+		#minimap.pivot_offset = minimap.og_pos + self.global_position
+		#minimap.global_position = minimap.og_pos
+		#minimap.rotation = rot 
+		#minimap.chill = false
 		return
 	if tile.has_ollon:
 		color = Color(brown)

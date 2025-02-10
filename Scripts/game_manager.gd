@@ -17,7 +17,8 @@ var ollon_tiles = []
 var projectiles = []
 
 var tile_scene = preload("res://Scenes/tile.tscn")
-@onready var control = $CanvasLayer/Control
+@onready var control = $CanvasLayer/SubViewportContainer/SubViewport/Control
+
 var projectile_scene = preload("res://Scenes/projectile.tscn")
 var projectile_shadow_scene = preload("res://Scenes/shadow.tscn")
 var base_tile_position: Vector3
@@ -31,6 +32,9 @@ var music_by_intesity = [
 	preload("res://Sounds/main-3.wav"),
 	preload("res://Sounds/main-4.wav")
 ]
+
+func size() -> int:
+	return MAP_SIZE * 8
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	create_map()
@@ -62,43 +66,43 @@ func spawn_projectiles():
 func spawn_projectile():
 	var player = get_parent().get_node("Player")
 	# Generate a random spawn position
-	var spawn_x = randi_range(0, MAP_SIZE * TILE_SCALE)
-	var spawn_z = randi_range(0, MAP_SIZE * TILE_SCALE)
-	var spawn_position = Vector3(spawn_x, 64, spawn_z)
-
-	#randomize target direction
-	print("player position", player.current_tile)
-	var variation = 10
-	var selected_target_tile = player.current_tile
-	var too_close_to_base = true
-	while too_close_to_base:
-		if base_tile_position.distance_to(selected_target_tile.position) < 4*TILE_SCALE:
-			selected_target_tile = selected_target_tile.select_random_neighbour()
-		else:
-			too_close_to_base = false
-
-	var neighbours_left_to_explore = randi_range(0, 2)
-	while neighbours_left_to_explore > 0:
-		selected_target_tile = selected_target_tile.select_random_neighbour()
-		if selected_target_tile.state in [0, 1]:
-			neighbours_left_to_explore -= 1
-
-	var shadow = projectile_shadow_scene.instantiate()
-	add_child(shadow)
-	shadow.position = Vector3(
-		selected_target_tile.position.x, 
-		selected_target_tile.position.y + 0.5,
-		selected_target_tile.position.z,
-	) 
-	# Instantiate projectile
-	var projectile = projectile_scene.instantiate()
-	add_child(projectile)
-
-	# Set position and target
-	projectile.position = spawn_position
-	projectile.set_target(shadow.position)  # Set direction
-	projectile.my_shadow = shadow
-	projectile.target_tile = selected_target_tile
+	#var spawn_x = randi_range(0, MAP_SIZE * TILE_SCALE)
+	#var spawn_z = randi_range(0, MAP_SIZE * TILE_SCALE)
+	#var spawn_position = Vector3(spawn_x, 64, spawn_z)
+#
+	##randomize target direction
+	#print("player position", player.current_tile)
+	#var variation = 10
+	#var selected_target_tile = player.current_tile
+	#var too_close_to_base = true
+	#while too_close_to_base:
+		#if base_tile_position.distance_to(selected_target_tile.position) < 4*TILE_SCALE:
+			#selected_target_tile = selected_target_tile.select_random_neighbour()
+		#else:
+			#too_close_to_base = false
+#
+	#var neighbours_left_to_explore = randi_range(0, 2)
+	#while neighbours_left_to_explore > 0:
+		#selected_target_tile = selected_target_tile.select_random_neighbour()
+		#if selected_target_tile.state in [0, 1]:
+			#neighbours_left_to_explore -= 1
+#
+	#var shadow = projectile_shadow_scene.instantiate()
+	#add_child(shadow)
+	#shadow.position = Vector3(
+		#selected_target_tile.position.x, 
+		#selected_target_tile.position.y + 0.5,
+		#selected_target_tile.position.z,
+	#) 
+	## Instantiate projectile
+	#var projectile = projectile_scene.instantiate()
+	#add_child(projectile)
+#
+	## Set position and target
+	#projectile.position = spawn_position
+	#projectile.set_target(shadow.position)  # Set direction
+	#projectile.my_shadow = shadow
+	#projectile.target_tile = selected_target_tile
 
 func create_map():
 	var middle_of_map = (MAP_SIZE - 1) / 2

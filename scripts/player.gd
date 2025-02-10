@@ -16,11 +16,14 @@ signal dashing_changed(value: bool)
 @onready var propeller_ljud: AudioStreamPlayer3D = $Zeppelinare/Zeppelinare/Propeller/PropellerLjud
 @onready var zeppelinare: Node3D = $Zeppelinare
 @onready var swing_wind: AudioStreamPlayer3D = $Zeppelinare/Zeppelinare/SwingWind
+@onready var game_manager = $"../GameManager"
+var offset_from_gm: Vector3
 
 func _ready() -> void:
 	dash.propeller_ljud = propeller_ljud
 	original_speed = speed
 	EventManager.ollon_saved = 0
+	offset_from_gm = game_manager.position
 
 func set_rescuing(value):
 	rescuing = value
