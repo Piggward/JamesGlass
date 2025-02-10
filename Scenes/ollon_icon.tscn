@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bcoh14okly0me" path="res://Textures/ollon.psd.png" id="1_804e8"]
 
 [node name="TextureRect" type="TextureRect"]
+custom_minimum_size = Vector2(75, 75)
 offset_right = 837.0
 offset_bottom = 616.0
 scale = Vector2(0.141288, 0.141288)

@@ -11,7 +11,7 @@ var current: int = 0
 var ollon_list: Array[TextureRect] = []
 var depositing = false
 @onready var panel_container = $PanelContainer
-@onready var rescue_counter = $"../PanelContainer/RescueCounter"
+@onready var rescue_counter = $"../PanelContainer/MarginContainer/RescueCounter"
 
 var jingles_to_play = 0
 var jingles_played = 0
