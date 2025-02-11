@@ -33,14 +33,36 @@ var music_by_intesity = [
 	preload("res://Sounds/main-4.wav")
 ]
 
+var mesh_list = [
+	preload("res://Models/1_0.obj"),
+	preload("res://Models/1_1.obj"),
+	preload("res://Models/1_2.obj"),
+	preload("res://Models/2_0.obj"),
+	preload("res://Models/2_1.obj"),
+	preload("res://Models/2_2.obj"),
+	preload("res://Models/3_0.obj"),
+	preload("res://Models/3_1.obj"),
+	preload("res://Models/3_2.obj"),
+	preload("res://Models/4_0.obj"),
+	preload("res://Models/4_1.obj"),
+	preload("res://Models/4_2.obj"),
+	preload("res://Models/mountain_tile.obj"),
+	preload("res://Models/Big tree.obj"),
+	preload("res://Models/1_0.obj"),
+	]
+
 func size() -> int:
 	return MAP_SIZE * 8
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var start = Time.get_ticks_usec()
+	print("Game manager ready: ", start/1000000.0)
 	create_map()
-	print("Map created")
+	var end = Time.get_ticks_usec()
+	print("Map created: ", (end)/1000000.0)
 	create_rim()
-	print("Rim created")
+	end = Time.get_ticks_usec()
+	print("Rim created: ", (end)/1000000.0)
 	light_initial_fires()
 	print("Initial fires lit")
 	spawn_ollon()
@@ -110,16 +132,22 @@ func create_map():
 		var row = []
 		for x in range(MAP_SIZE):
 			var tile = tile_scene.instantiate()
+			var tile_set_number = randi_range(0, 3)
+			tile.mesh_list = mesh_list.slice(tile_set_number*3, tile_set_number*3+4)
 			if z == x && z == middle_of_map: # Big Tree in the middle
 				tile.state = Tile.TileState.BASE
+				tile.mesh_list.append(mesh_list[13])
+				tile.mesh_list.append(mesh_list[13])
 			tile.pos = Vector3(x * TILE_SCALE, 0, z * TILE_SCALE)
 			add_child(tile)
 			row.append(tile)
 		tiles_map.append(row)
-		
+	
+	print("-- Initial pass: ", Time.get_ticks_usec()/1000000.0)
 	for z in range(MAP_SIZE):
 		for x in range(MAP_SIZE):
 			connect_neighbors(tiles_map[z][x])
+	print("-- Second pass: ", Time.get_ticks_usec()/1000000.0)
 	
 	# TODO: move me, I dont really belong here
 	# Det är för att göra tiledsen runtom BigTree som safeareas
@@ -135,11 +163,16 @@ func create_map():
 		]
 		for neighbor in (base_tile.neighbours + additional_safe_tiles):
 			neighbor.state = Tile.TileState.LANDING
+			neighbor.mesh_list.append(mesh_list[14])
+			neighbor.mesh_list.append(mesh_list[14])
 			neighbor.render()
 			for add_neighbor in neighbor.neighbours:
 				if add_neighbor not in additional_safe_tiles && add_neighbor != base_tile:
+					add_neighbor.mesh_list.append(mesh_list[14])
+					add_neighbor.mesh_list.append(mesh_list[14])
 					add_neighbor.state = Tile.TileState.LANDING
 					add_neighbor.render()
+	print("-- Middle Tree pass: ", Time.get_ticks_usec()/1000000.0)
 	
 
 func create_rim():
@@ -148,6 +181,7 @@ func create_rim():
 			if (x >= 0 && x < MAP_SIZE) && (z >= 0 && z < MAP_SIZE):
 				continue
 			var rim_tile = tile_scene.instantiate()
+			rim_tile.mesh_list = mesh_list.slice(0, 5)
 			rim_tile.state = 2
 			if z == -RIM_SIZE || z == MAP_SIZE+RIM_SIZE || x == -RIM_SIZE || x == MAP_SIZE+RIM_SIZE:
 				rim_tile.state = 3

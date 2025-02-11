@@ -18,7 +18,6 @@ var mesh: MeshInstance3D
 @onready var fire_effect: Node3D = $FireEffect
 @onready var ekollon: Node3D = $Ekollon
 
-var tile_set_number = randi_range(1, 4)
 var has_ollon = false
 var neighour_to_base = false
 
@@ -27,33 +26,24 @@ var dry_out_rate = 2
 signal tile_change(tile: Tile)
 
 # TODO: move to game manager
-var mesh_list = [
-	load("Models/%s_0.obj" % [tile_set_number]),
-	load("Models/%s_1.obj" % [tile_set_number]),
-	load("Models/%s_2.obj" % [tile_set_number]),
-	load("Models/mountain_tile.obj"),
-	load("Models/Big tree.obj"),
-	load("Models/1_0.obj"),
-	]
-var material = load("res://Materials/MainMaterial.tres")
+var mesh_list
+var material = preload("res://Materials/MainMaterial.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#var start = Time.get_ticks_usec()
 	mesh = $StaticBody/Mesh
 	position = pos
 	scale = Vector3(2, 2, 2) # <---------- Doubles the size of the things 😇
 	rotate_y(randi_range(0,3) * (PI/2)) # 90degrees  * 0-3
 	
 	render()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	#print("--- Tile took: ", (Time.get_ticks_usec() - start)/1000000.0)
 
 func render():
+	
 	mesh.mesh = mesh_list[state]
 	mesh.set_surface_override_material(0, material)
-	
 	if state == TileState.BASE:
 		scale = Vector3(4, 4, 4)
 		$StaticBody/Mesh.scale = Vector3(2, 2, 2)

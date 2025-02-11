@@ -13,5 +13,5 @@ func _ready():
 
 func _process(delta):
 	self.rotation = -player.rotation.y
-	print(position)
+	#print(position)
 	pass
